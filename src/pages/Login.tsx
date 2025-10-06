@@ -12,7 +12,7 @@ import classes from "./Login.module.css"
 
 export function Login() {
   return (
-    <div className={classes.wrapper}>
+    <div className={classes.wrapper}  >
       <Paper className={classes.form}>
         <Title order={2} className={classes.title}>
           Seja bem vindo ao ANU!
