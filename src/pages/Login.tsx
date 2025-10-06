@@ -1,11 +1,11 @@
 import {
-  Anchor,
-  Button,
+/*   Anchor,
+ */  Button,
   Checkbox,
   Paper,
   PasswordInput,
-  Text,
-  TextInput,
+/*   Text,
+ */  TextInput,
   Title,
 } from "@mantine/core"
 import classes from "./Login.module.css"
@@ -31,17 +31,28 @@ export function Login() {
           size="md"
           radius="md"
         />
-        <Checkbox label="Me mantenha conectado" mt="xl" size="md" />
-        <Button id="buttonLogin" fullWidth mt="xl" size="md" radius="md">
+        <Checkbox
+          color="rgba(224, 97, 40, 1)"
+          label="Me mantenha conectado"
+          mt="xl"
+          size="md"
+        />
+        <Button
+          color="rgba(224, 97, 40, 1)"
+          fullWidth
+          mt="xl"
+          size="md"
+          radius="md"
+        >
           Login
         </Button>
 
-        <Text ta="center" mt="md">
+        {/*         <Text ta="center" mt="md">
           Don&apos;t have an account?{" "}
           <Anchor href="#" fw={500} onClick={(event) => event.preventDefault()}>
             Register
           </Anchor>
-        </Text>
+        </Text> */}
       </Paper>
     </div>
   )

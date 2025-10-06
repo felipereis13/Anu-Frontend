@@ -1,13 +1,17 @@
 .wrapper {
-  min-height: 900px;
+  height: 100vh;
+  background-size: contain;
   background-size: cover;
   background-image: url("/src/assets/anuFoto.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
+
 
 .form {
   border-right: 1px solid
     light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
-  min-height: 900px;
+  height: 100vh;
   max-width: 450px;
   padding: 30px;
   padding-top: 80px;
@@ -26,4 +30,3 @@
   margin-top: var(--mantine-spacing-md);
   margin-bottom: 50px;
 }
-
