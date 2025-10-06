@@ -1,12 +1,11 @@
 
 import "@mantine/core/styles.css"
-import { Login } from "./pages/Login"
+import { Nav } from "./Components/Nav"
 
 function App() {
   return (
     <div className="App">
-      <App />
-      <Login />
+      <Nav />
     </div>
   )
 }
