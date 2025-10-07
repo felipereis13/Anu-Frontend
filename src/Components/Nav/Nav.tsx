@@ -9,16 +9,18 @@ import {
 import {
     Home,
     Calendar,
+    NewTab, 
     Settings,
     ProfileCircle
 } from 'iconoir-react';
 
-import logo from '../assets/anuLogoMin.png';
+import logo from '../../assets/anuLogoMin.png'
 import classes from './Nav.module.css';
 
 const mockdata = [
     { icon: Home, label: 'Home' },
     { icon: Calendar, label: 'Calendar' },
+    { icon: NewTab, label: 'New Tab'},
     { icon: Settings, label: 'Settings' },
 ];
 
