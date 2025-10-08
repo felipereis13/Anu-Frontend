@@ -1,4 +1,3 @@
-
 import "@mantine/core/styles.css"
 import { Nav } from "./Components/Nav/Nav"
 import { HeaderSearch } from "./Components/search/Search"
