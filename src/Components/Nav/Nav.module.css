@@ -1,6 +1,7 @@
 .navbar {
+    background-color: white;
     width: 80px;
-    height: 100vh;
+    height: 93vh;
     padding: var(--mantine-spacing-md);
     display: flex;
     flex-direction: column;
