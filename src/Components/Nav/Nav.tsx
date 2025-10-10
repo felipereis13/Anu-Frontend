@@ -21,7 +21,6 @@ const mockdata = [
     { icon: Home, label: 'Home' },
     { icon: Calendar, label: 'Calendar' },
     { icon: NewTab, label: 'New Tab'},
-    { icon: Settings, label: 'Settings' },
 ];
 
 interface NavLinkProps {
@@ -74,7 +73,9 @@ export function Nav() {
                     {links}
                 </Stack>
             </div>
-
+            <div>
+                <NavbarLink icon={Settings} label="Settings" /> 
+            </div>
             <div>
                 <NavbarLink icon={ProfileCircle} label="Change account" />
             </div>
