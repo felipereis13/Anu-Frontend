@@ -6,10 +6,8 @@ import "./erro.css";
 export default function NotFoundPage() {
   return (
     <div className="wrapper">
-      {/* Barra lateral */}
       <Nav />
 
-      {/* Conteúdo principal */}
       <main className="notfound-container">
         <section className="notfound-top">
           <h1>Ops! Alguma coisa não está certa...</h1>

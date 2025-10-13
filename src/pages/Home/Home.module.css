@@ -1,0 +1,28 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh;
+  background-color: #b6a894;
+}
+
+.CardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1rem; 
+  justify-items: center; 
+  align-items: center;
+}
+
+.Card {
+  width: 120px;
+  height: 80px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
