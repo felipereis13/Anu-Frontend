@@ -1,9 +1,14 @@
 import { Search } from 'iconoir-react';
 import { Autocomplete } from '@mantine/core';
+import { useViewportSize } from '@mantine/hooks';
 import classes from './Search.module.css';
 import Anu from '../../assets/ANU - Apresentação Identidade Visual 2.png'
 
 export function HeaderSearch() {
+  const { width } = useViewportSize();
+  
+  const placeholder = width <= 576 ? '' : 'No que podemos te ajudar hoje?';
+
   return (
     <header className={classes.header}>
       <div className={classes.inner}>
@@ -15,7 +20,7 @@ export function HeaderSearch() {
         />
         <Autocomplete
           className={classes.search}
-          placeholder="No que podemos te ajudar hoje?"
+          placeholder={placeholder}
           rightSection={
             <Search
               width={16} 
@@ -23,7 +28,6 @@ export function HeaderSearch() {
               color='#A39787'
             />
           }
-          visibleFrom="xs"
           size='md'
         />
       </div>

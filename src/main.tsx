@@ -17,6 +17,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Login />,
   },
+  {
+    path: "/funcionario",
+    element: <Funcionario />,
+  },
 ])
 
 // fim de rotas
