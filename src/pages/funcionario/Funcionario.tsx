@@ -5,7 +5,7 @@ import classes from './funcionario.module.css';
 import { Nav } from "../../Components/Nav/Nav";
 import { HeaderSearch } from "../../Components/search/Search";
 
-// --- Início do código da tabela ---
+
 interface RowData {
   name: string;
   email: string;
@@ -85,10 +85,10 @@ const data = [
   { name: 'Pinkie Rice', company: 'Wolf, Trantow and Zulauf', email: 'Fiona.Kutch@hotmail.com' },
   { name: 'Brain Kreiger', company: 'Lueilwitz Group', email: 'Rico98@hotmail.com' },
 ];
-// --- Fim do código da tabela ---
+
 
 export function Funcionario() {
-  // Estado da tabela
+
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
@@ -128,7 +128,7 @@ export function Funcionario() {
         </Grid>
         <main className={classes['funcionario-container']}>
           <section className={classes['funcionario-top']}>
-            {/* Você pode adicionar outros elementos aqui */}
+            
           </section>
           <section className={classes['funcionario-content']}>
             <div className={classes['funcionario-text']}>
