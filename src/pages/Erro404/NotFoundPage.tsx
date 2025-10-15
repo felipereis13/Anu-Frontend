@@ -1,11 +1,11 @@
 import { Nav } from "../../Components/Nav/Nav";
 import IdentidadeVisual from "../../icons figma/ANU - Apresentação Identidade Visual (10).png";
-import "./erro.css";
+import "./NotFoundPage.module.css";
 
 
 export default function NotFoundPage() {
   return (
-    <div className="wrapper">
+    <div className="NotFoundPageWapper">
       <Nav />
 
       <main className="notfound-container">
@@ -17,15 +17,19 @@ export default function NotFoundPage() {
           <div className="notfound-text">
             <p>
               A página que você está tentando acessar não existe.
-              <br /><br />
-              Não se preocupe, isso acontece! Você pode ter digitado o endereço errado, ou a
-              página foi movida para uma nova localização.
-              <br /><br />
-              Enquanto resolvemos essa pequena confusão de endereço, que tal tentar voltar
-              para a página inicial?
-              <br /><br />
-              Se você acredita que isso é um erro da nossa parte, por favor, entre em contato
-              com o suporte. Assim, podemos colocar as coisas de volta nos trilhos!
+              <br />
+              <br />
+              Não se preocupe, isso acontece! Você pode ter digitado o endereço
+              errado, ou a página foi movida para uma nova localização.
+              <br />
+              <br />
+              Enquanto resolvemos essa pequena confusão de endereço, que tal
+              tentar voltar para a página inicial?
+              <br />
+              <br />
+              Se você acredita que isso é um erro da nossa parte, por favor,
+              entre em contato com o suporte. Assim, podemos colocar as coisas
+              de volta nos trilhos!
             </p>
             <button className="btn-voltar">Voltar para página inicial</button>
           </div>
@@ -36,6 +40,6 @@ export default function NotFoundPage() {
         </section>
       </main>
     </div>
-  );
+  )
 }
 

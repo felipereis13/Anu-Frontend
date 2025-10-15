@@ -6,6 +6,7 @@ import { MantineProvider } from "@mantine/core"
 //rotas
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from "./pages/Login/Login.tsx"
+import  Error  from "./pages/Erro404/NotFoundPage.tsx"
 
 const router = createBrowserRouter([
   {
@@ -18,9 +19,13 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
+    path: "/erro",
+    element: <Error />,
+  },
+  /*   {
     path: "/funcionario",
     element: <Funcionario />,
-  },
+  }, */
 ])
 
 // fim de rotas
