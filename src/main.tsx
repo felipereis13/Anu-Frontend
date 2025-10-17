@@ -7,6 +7,8 @@ import { MantineProvider } from "@mantine/core"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from "./pages/Login/Login.tsx"
 import  Error  from "./pages/Erro404/NotFoundPage.tsx"
+import { Funcionario } from "./pages/Funcionario/Funcionario.tsx"
+
 
 const router = createBrowserRouter([
   {
@@ -22,10 +24,10 @@ const router = createBrowserRouter([
     path: "/erro",
     element: <Error />,
   },
-  /*   {
-    path: "/funcionario",
+     {
+    path: "/Funcionario",
     element: <Funcionario />,
-  }, */
+  },
 ])
 
 // fim de rotas
