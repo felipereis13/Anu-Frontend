@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Container, Grid, Text, ScrollArea, Table, TextInput, UnstyledButton, Group, Center } from '@mantine/core';
 import { IconChevronDown, IconChevronUp, IconSearch, IconSelector } from '@tabler/icons-react';
-import classes from './funcionario.module.css';
+import classes from './Funcionario.module.css';
 import { Nav } from "../../Components/Nav/Nav";
 import { HeaderSearch } from "../../Components/search/Search";
 
@@ -10,6 +10,7 @@ interface RowData {
   name: string;
   email: string;
   company: string;
+  funcao: string;
 }
 
 interface ThProps {
@@ -68,22 +69,22 @@ function sortData(
 }
 
 const data = [
-  { name: 'Athena Weissnat', company: 'Little - Rippin', email: 'Elouise.Prohaska@yahoo.com' },
-  { name: 'Deangelo Runolfsson', company: 'Greenfelder - Krajcik', email: 'Kadin_Trantow87@yahoo.com' },
-  { name: 'Danny Carter', company: 'Kohler and Sons', email: 'Marina3@hotmail.com' },
-  { name: 'Trace Tremblay PhD', company: 'Crona, Aufderhar and Senger', email: 'Antonina.Pouros@yahoo.com' },
-  { name: 'Derek Dibbert', company: 'Gottlieb LLC', email: 'Abagail29@hotmail.com' },
-  { name: 'Viola Bernhard', company: 'Funk, Rohan and Kreiger', email: 'Jamie23@hotmail.com' },
-  { name: 'Austin Jacobi', company: 'Botsford - Corwin', email: 'Genesis42@yahoo.com' },
-  { name: 'Hershel Mosciski', company: 'Okuneva, Farrell and Kilback', email: 'Idella.Stehr28@yahoo.com' },
-  { name: 'Mylene Ebert', company: 'Kirlin and Sons', email: 'Hildegard17@hotmail.com' },
-  { name: 'Lou Trantow', company: 'Parisian - Lemke', email: 'Hillard.Barrows1@hotmail.com' },
-  { name: 'Dariana Weimann', company: 'Schowalter - Donnelly', email: 'Colleen80@gmail.com' },
-  { name: 'Dr. Christy Herman', company: 'VonRueden - Labadie', email: 'Lilyan98@gmail.com' },
-  { name: 'Katelin Schuster', company: 'Jacobson - Smitham', email: 'Erich_Brekke76@gmail.com' },
-  { name: 'Melyna Macejkovic', company: 'Schuster LLC', email: 'Kylee4@yahoo.com' },
-  { name: 'Pinkie Rice', company: 'Wolf, Trantow and Zulauf', email: 'Fiona.Kutch@hotmail.com' },
-  { name: 'Brain Kreiger', company: 'Lueilwitz Group', email: 'Rico98@hotmail.com' },
+  { name: 'Athena Weissnat', company: 'Little - Rippin', email: 'Elouise.Prohaska@yahoo.com', funcao: 'Gerente Junior' },
+  { name: 'Deangelo Runolfsson', company: 'Greenfelder - Krajcik', email: 'Kadin_Trantow87@yahoo.com', funcao: 'Vendedor' },
+  { name: 'Danny Carter', company: 'Kohler and Sons', email: 'Marina3@hotmail.com',   funcao: 'Estagiario' },
+  { name: 'Trace Tremblay PhD', company: 'Crona, Aufderhar and Senger', email: 'Antonina.Pouros@yahoo.com', funcao: 'Gerente' },
+  { name: 'Derek Dibbert', company: 'Gottlieb LLC', email: 'Abagail29@hotmail.com',   funcao: 'Designer' },
+  { name: 'Viola Bernhard', company: 'Funk, Rohan and Kreiger', email: 'Jamie23@hotmail.com', funcao: 'Analista QA' },
+  { name: 'Austin Jacobi', company: 'Botsford - Corwin', email: 'Genesis42@yahoo.com', funcao: 'Desenvolvedor' },
+  { name: 'Hershel Mosciski', company: 'Okuneva, Farrell and Kilback', email: 'Idella.Stehr28@yahoo.com', funcao: 'DevOps' },
+  { name: 'Mylene Ebert', company: 'Kirlin and Sons', email: 'Hildegard17@hotmail.com', funcao: 'Marketing' },
+  { name: 'Lou Trantow', company: 'Parisian - Lemke', email: 'Hillard.Barrows1@hotmail.com',  funcao: 'Gerente Senior' },
+  { name: 'Dariana Weimann', company: 'Schowalter - Donnelly', email: 'Colleen80@gmail.com',  funcao: 'RH' },
+  { name: 'Dr. Christy Herman', company: 'VonRueden - Labadie', email: 'Lilyan98@gmail.com', funcao: 'Financeiro' },
+  { name: 'Katelin Schuster', company: 'Jacobson - Smitham', email: 'Erich_Brekke76@gmail.com', funcao: 'Contador' },
+  { name: 'Melyna Macejkovic', company: 'Schuster LLC', email: 'Kylee4@yahoo.com',  funcao: 'Assistente' },
+  { name: 'Pinkie Rice', company: 'Wolf, Trantow and Zulauf', email: 'Fiona.Kutch@hotmail.com', funcao: 'Auxiliar' },
+  { name: 'Brain Kreiger', company: 'Lueilwitz Group', email: 'Rico98@hotmail.com', funcao: 'Suporte' },
 ];
 
 
@@ -112,6 +113,7 @@ export function Funcionario() {
       <Table.Td>{row.name}</Table.Td>
       <Table.Td>{row.email}</Table.Td>
       <Table.Td>{row.company}</Table.Td>
+       <Table.Td>{row.funcao}</Table.Td>
     </Table.Tr>
   ));
 
@@ -142,29 +144,36 @@ export function Funcionario() {
                 />
                 <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
                   <Table.Tbody>
-                    <Table.Tr>
-                      <Th
-                        sorted={sortBy === 'name'}
-                        reversed={reverseSortDirection}
-                        onSort={() => setSorting('name')}
-                      >
-                        Nome
-                      </Th>
-                      <Th
-                        sorted={sortBy === 'email'}
-                        reversed={reverseSortDirection}
-                        onSort={() => setSorting('email')}
-                      >
-                        Email
-                      </Th>
-                      <Th
-                        sorted={sortBy === 'company'}
-                        reversed={reverseSortDirection}
-                        onSort={() => setSorting('company')}
-                      >
-                        Empresa
-                      </Th>
-                    </Table.Tr>
+<Table.Tr>
+  <Th
+    sorted={sortBy === 'name'}
+    reversed={reverseSortDirection}
+    onSort={() => setSorting('name')}
+  >
+    Nome
+  </Th>
+  <Th
+    sorted={sortBy === 'email'}
+    reversed={reverseSortDirection}
+    onSort={() => setSorting('email')}
+  >
+    Email
+  </Th>
+  <Th
+    sorted={sortBy === 'company'}
+    reversed={reverseSortDirection}
+    onSort={() => setSorting('company')}
+  >
+    Empresa
+  </Th>
+  <Th
+    sorted={sortBy === 'funcao'}
+    reversed={reverseSortDirection}
+    onSort={() => setSorting('funcao')}
+  >
+    Função
+  </Th>
+</Table.Tr>
                   </Table.Tbody>
                   <Table.Tbody>
                     {rows.length > 0 ? (
