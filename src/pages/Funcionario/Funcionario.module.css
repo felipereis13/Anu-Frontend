@@ -8,8 +8,9 @@
 .Container {
   margin-left: 40px;
   margin-right: 5px;;
-  margin-top: 40px; 
-  padding: 50px;
+  margin-top: 60px; 
+  margin-bottom: 40px;
+  padding: 40px;
 }
 
 .funcionario-container {
@@ -24,6 +25,6 @@
 
 .funcionario-content {
   width: 100%;
-  max-width: 900px;
+  max-width: 1500px;
 }
 

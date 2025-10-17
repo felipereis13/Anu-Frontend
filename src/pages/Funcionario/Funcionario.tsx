@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { Container, Grid, Text, ScrollArea, Table, TextInput, UnstyledButton, Group, Center } from '@mantine/core';
+import {Container, Text, ScrollArea, Table, TextInput, UnstyledButton, Group, Center, Pagination} from '@mantine/core';
 import { IconChevronDown, IconChevronUp, IconSearch, IconSelector } from '@tabler/icons-react';
 import classes from './Funcionario.module.css';
 import { Nav } from "../../Components/Nav/Nav";
 import { HeaderSearch } from "../../Components/search/Search";
 
-
 interface RowData {
   name: string;
-  email: string;
+  departamento: string;
+  projeto: string;
+  disponibilidade: string;
   company: string;
   funcao: string;
+  tags: string;
 }
 
 interface ThProps {
@@ -37,6 +39,7 @@ function Th({ children, reversed, sorted, onSort }: ThProps) {
     </Table.Th>
   );
 }
+
 
 function filterData(data: RowData[], search: string) {
   const query = search.toLowerCase().trim();
@@ -68,33 +71,47 @@ function sortData(
   );
 }
 
+
 const data = [
-  { name: 'Athena Weissnat', company: 'Little - Rippin', email: 'Elouise.Prohaska@yahoo.com', funcao: 'Gerente Junior' },
-  { name: 'Deangelo Runolfsson', company: 'Greenfelder - Krajcik', email: 'Kadin_Trantow87@yahoo.com', funcao: 'Vendedor' },
-  { name: 'Danny Carter', company: 'Kohler and Sons', email: 'Marina3@hotmail.com',   funcao: 'Estagiario' },
-  { name: 'Trace Tremblay PhD', company: 'Crona, Aufderhar and Senger', email: 'Antonina.Pouros@yahoo.com', funcao: 'Gerente' },
-  { name: 'Derek Dibbert', company: 'Gottlieb LLC', email: 'Abagail29@hotmail.com',   funcao: 'Designer' },
-  { name: 'Viola Bernhard', company: 'Funk, Rohan and Kreiger', email: 'Jamie23@hotmail.com', funcao: 'Analista QA' },
-  { name: 'Austin Jacobi', company: 'Botsford - Corwin', email: 'Genesis42@yahoo.com', funcao: 'Desenvolvedor' },
-  { name: 'Hershel Mosciski', company: 'Okuneva, Farrell and Kilback', email: 'Idella.Stehr28@yahoo.com', funcao: 'DevOps' },
-  { name: 'Mylene Ebert', company: 'Kirlin and Sons', email: 'Hildegard17@hotmail.com', funcao: 'Marketing' },
-  { name: 'Lou Trantow', company: 'Parisian - Lemke', email: 'Hillard.Barrows1@hotmail.com',  funcao: 'Gerente Senior' },
-  { name: 'Dariana Weimann', company: 'Schowalter - Donnelly', email: 'Colleen80@gmail.com',  funcao: 'RH' },
-  { name: 'Dr. Christy Herman', company: 'VonRueden - Labadie', email: 'Lilyan98@gmail.com', funcao: 'Financeiro' },
-  { name: 'Katelin Schuster', company: 'Jacobson - Smitham', email: 'Erich_Brekke76@gmail.com', funcao: 'Contador' },
-  { name: 'Melyna Macejkovic', company: 'Schuster LLC', email: 'Kylee4@yahoo.com',  funcao: 'Assistente' },
-  { name: 'Pinkie Rice', company: 'Wolf, Trantow and Zulauf', email: 'Fiona.Kutch@hotmail.com', funcao: 'Auxiliar' },
-  { name: 'Brain Kreiger', company: 'Lueilwitz Group', email: 'Rico98@hotmail.com', funcao: 'Suporte' },
+  { name: 'Athena Weissnat', departamento: "TI", projeto: 'Anatel', disponibilidade: 'Disponível', company: 'Tech Solutions', funcao: 'Desenvolvedora', tags: 'React, Node.js' },
+  { name: 'Liam Kuhlman', departamento: "Marketing", projeto: 'Google', disponibilidade: 'Indisponível', company: 'Market Experts', funcao: 'Analista de Marketing', tags: 'SEO, Google Ads' },
+  { name: 'Olivia Prosacco', departamento: "Financeiro", projeto: 'Banco do Brasil', disponibilidade: 'Disponível', company: 'Finance Corp', funcao: 'Contadora', tags: 'Excel, SAP' },
+  { name: 'Noah Wiza', departamento: "Recursos Humanos", projeto: 'Ambev', disponibilidade: 'Disponível', company: 'HR Solutions', funcao: 'Recrutador', tags: 'Entrevistas, Onboarding' },
+  { name: 'Ava McGlynn', departamento: "Vendas", projeto: 'Magazine Luiza', disponibilidade: 'Indisponível', company: 'Sales Pros', funcao: 'Representante de Vendas', tags: 'CRM, Negociação' },
+  { name: 'Elijah Koss', departamento: "Logística", projeto: 'Correios', disponibilidade: 'Disponível', company: 'LogiTrans', funcao: 'Coordenador de Logística', tags: 'Supply Chain, Transporte' },
+  { name: 'Sophia Bogan', departamento: "Atendimento ao Cliente", projeto: 'Nubank', disponibilidade: 'Disponível', company: 'Client First', funcao: 'Atendente', tags: 'Suporte, CRM' },
+  { name: 'James Schaden', departamento: "Desenvolvimento de Produto", projeto: 'iFood', disponibilidade: 'Indisponível', company: 'Product Innovators', funcao: 'Gerente de Produto', tags: 'Agile, UX/UI' },
+  { name: 'Isabella Kautzer', departamento: "Design", projeto: '99', disponibilidade: 'Disponível', company: 'Creative Minds', funcao: 'Designer Gráfico', tags: 'Photoshop, Illustrator' },
+  { name: 'Benjamin OKon', departamento: "Jurídico", projeto: 'Petrobras', disponibilidade: 'Disponível', company: 'Legal Experts', funcao: 'Advogado', tags: 'Contratos, Compliance' },
+  { name: 'Mia Runte', departamento: "Pesquisa e Desenvolvimento", projeto: 'Embraer', disponibilidade: 'Indisponível', company: 'Innovatech', funcao: 'Cientista de Dados', tags: 'Python, Machine Learning' },
+  { name: 'Lucas Witting', departamento: "Operações", projeto: 'Vale', disponibilidade: 'Disponível', company: 'Ops Solutions', funcao: 'Analista de Operações', tags: 'Processos, Eficiência' },
+  { name: 'Charlotte Ziemann', departamento: "Comunicação", projeto: 'Globo', disponibilidade: 'Disponível', company: 'Comms Agency', funcao: 'Especialista em Comunicação', tags: 'Redes Sociais, PR' },
+  { name: 'Henry Langosh', departamento: "TI", projeto: 'Microsoft', disponibilidade: 'Indisponível', company: 'Tech Solutions', funcao: 'Administrador de Sistemas', tags: 'Azure, Windows Server' },
+  { name: 'Amelia Dietrich', departamento: "Marketing", projeto: 'Facebook', disponibilidade: 'Disponível', company: 'Market Experts', funcao: 'Gerente de Marketing', tags: 'Content Marketing, Analytics' },
+  { name: 'Alexander Kiehn', departamento: "Financeiro", projeto: 'Itaú', disponibilidade: 'Disponível', company: 'Finance Corp', funcao: 'Analista Financeiro', tags: 'Finanças, Power BI' },
+  { name: 'Harper OConnell', departamento: "Recursos Humanos", projeto: 'Coca-Cola', disponibilidade: 'Indisponível', company: 'HR Solutions', funcao: 'Especialista em RH', tags: 'Treinamento, Desenvolvimento' },
+  { name: 'Ethan Braun', departamento: "Vendas", projeto: 'Casas Bahia', disponibilidade: 'Disponível', company: 'Sales Pros', funcao: 'Gerente de Vendas', tags: 'Liderança, Estratégia de Vendas' },
+  { name: 'Evelyn Gleichner', departamento: "Logística", projeto: 'DHL', disponibilidade: 'Disponível', company: 'LogiTrans', funcao: 'Analista de Logística', tags: 'Inventário, Distribuição' },
+  { name: 'Daniela Stokes', departamento: "Atendimento ao Cliente", projeto: 'XP Investimentos', disponibilidade: 'Indisponível', company: 'Client First', funcao: 'Gerente de Atendimento', tags: 'Satisfação do Cliente, Retenção' },
+  { name: 'Matthew Kulas', departamento: "Desenvolvimento de Produto", projeto: 'Rappi', disponibilidade: 'Disponível', company: 'Product Innovators', funcao: 'Desenvolvedor Full Stack', tags: 'JavaScript, Node.js' },
+  { name: 'Scarlett McClure', departamento: "Design", projeto: 'Spotify', disponibilidade: 'Indisponível', company: 'Creative Minds', funcao: 'UX Designer', tags: 'Figma, Prototipagem' },
+  { name: 'Josephine Witting', departamento: "Jurídico", projeto: 'Bradesco', disponibilidade: 'Disponível', company: 'Legal Experts', funcao: 'Consultora Jurídica', tags: 'Direito Empresarial, LGPD' },
+  { name: 'Samuel Greenholt', departamento: "Pesquisa e Desenvolvimento", projeto: 'Natura', disponibilidade: 'Disponível', company: 'Innovatech', funcao: 'Engenheiro de Software', tags: 'C++, Sistemas Embarcados' },
+  { name: 'Victoria Langworth', departamento: "Operações", projeto: 'Gerdau', disponibilidade: 'Indisponível', company: 'Ops Solutions', funcao: 'Gerente de Operações', tags: 'Gestão de Projetos, Lean' }
+
 ];
 
-
 export function Funcionario() {
-
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
 
+  
+  const [activePage, setPage] = useState(1);
+  const itemsPerPage = 12;
+
+ 
   const setSorting = (field: keyof RowData) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
     setReverseSortDirection(reversed);
@@ -102,18 +119,27 @@ export function Funcionario() {
     setSortedData(sortData(data, { sortBy: field, reversed, search }));
   };
 
+ 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearch(value);
     setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
+    setPage(1); 
   };
 
-  const rows = sortedData.map((row) => (
+
+  const startIndex = (activePage - 1) * itemsPerPage;
+  const paginatedData = sortedData.slice(startIndex, startIndex + itemsPerPage);
+
+  const rows = paginatedData.map((row) => (
     <Table.Tr key={row.name}>
       <Table.Td>{row.name}</Table.Td>
-      <Table.Td>{row.email}</Table.Td>
+      <Table.Td>{row.departamento}</Table.Td>
+      <Table.Td>{row.projeto}</Table.Td>
+      <Table.Td>{row.disponibilidade}</Table.Td>
       <Table.Td>{row.company}</Table.Td>
-       <Table.Td>{row.funcao}</Table.Td>
+      <Table.Td>{row.funcao}</Table.Td>
+      <Table.Td>{row.tags}</Table.Td>
     </Table.Tr>
   ));
 
@@ -122,75 +148,57 @@ export function Funcionario() {
       <Nav />
       <HeaderSearch />
       <Container fluid className={classes.Container} style={{ marginLeft: '80px' }}>
-        <Grid justify="center" align="flex-start" gutter="md">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <Grid.Col key={i} span={{ base: 6, sm: 4, md: 2 }}>
-            </Grid.Col>
-          ))}
-        </Grid>
         <main className={classes['funcionario-container']}>
-          <section className={classes['funcionario-top']}>
-            
-          </section>
           <section className={classes['funcionario-content']}>
-            <div className={classes['funcionario-text']}>
-              <ScrollArea>
-                <TextInput
-                  placeholder="Buscar por qualquer campo"
-                  mb="md"
-                  leftSection={<IconSearch size={16} stroke={1.5} />}
-                  value={search}
-                  onChange={handleSearchChange}
+            <ScrollArea>
+              <TextInput
+                placeholder="Digite algo para começar a buscar"
+                mb="md"
+                leftSection={<IconSearch size={16} stroke={1.5} />}
+                value={search}
+                onChange={handleSearchChange}
+              />
+
+              <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
+                <Table.Thead>
+                  <Table.Tr>
+                    <Th sorted={sortBy === 'name'} reversed={reverseSortDirection} onSort={() => setSorting('name')}>Nome</Th>
+                    <Th sorted={sortBy === 'departamento'} reversed={reverseSortDirection} onSort={() => setSorting('departamento')}>Departamento</Th>
+                    <Th sorted={sortBy === 'projeto'} reversed={reverseSortDirection} onSort={() => setSorting('projeto')}>Projeto</Th>
+                    <Th sorted={sortBy === 'disponibilidade'} reversed={reverseSortDirection} onSort={() => setSorting('disponibilidade')}>Disponibilidade</Th>
+                    <Th sorted={sortBy === 'company'} reversed={reverseSortDirection} onSort={() => setSorting('company')}>Empresa</Th>
+                    <Th sorted={sortBy === 'funcao'} reversed={reverseSortDirection} onSort={() => setSorting('funcao')}>Função</Th>
+                    <Th sorted={sortBy === 'tags'} reversed={reverseSortDirection} onSort={() => setSorting('tags')}>Tags</Th>
+                  </Table.Tr>
+                </Table.Thead>
+
+                <Table.Tbody>
+                  {rows.length > 0 ? (
+                    rows
+                  ) : (
+                    <Table.Tr>
+                      <Table.Td colSpan={7}>
+                        <Text fw={500} ta="center">
+                          Ops, nenhum funcionário encontrado com esse termo...
+                        </Text>
+                      </Table.Td>
+                    </Table.Tr>
+                  )}
+                </Table.Tbody>
+              </Table>
+
+            
+              <Center mt="md">
+                <Pagination
+                  total={Math.ceil(sortedData.length / itemsPerPage)}
+                  value={activePage}
+                  onChange={setPage}
+                  color="#b6a894"
+                  size="sm"
+                  radius="md"
                 />
-                <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
-                  <Table.Tbody>
-<Table.Tr>
-  <Th
-    sorted={sortBy === 'name'}
-    reversed={reverseSortDirection}
-    onSort={() => setSorting('name')}
-  >
-    Nome
-  </Th>
-  <Th
-    sorted={sortBy === 'email'}
-    reversed={reverseSortDirection}
-    onSort={() => setSorting('email')}
-  >
-    Email
-  </Th>
-  <Th
-    sorted={sortBy === 'company'}
-    reversed={reverseSortDirection}
-    onSort={() => setSorting('company')}
-  >
-    Empresa
-  </Th>
-  <Th
-    sorted={sortBy === 'funcao'}
-    reversed={reverseSortDirection}
-    onSort={() => setSorting('funcao')}
-  >
-    Função
-  </Th>
-</Table.Tr>
-                  </Table.Tbody>
-                  <Table.Tbody>
-                    {rows.length > 0 ? (
-                      rows
-                    ) : (
-                      <Table.Tr>
-                        <Table.Td colSpan={3}>
-                          <Text fw={500} ta="center">
-                            Nenhum resultado encontrado
-                          </Text>
-                        </Table.Td>
-                      </Table.Tr>
-                    )}
-                  </Table.Tbody>
-                </Table>
-              </ScrollArea>
-            </div>
+              </Center>
+            </ScrollArea>
           </section>
         </main>
       </Container>
