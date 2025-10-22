@@ -10,6 +10,12 @@
   object-fit: cover;
 }
 
+@media (max-width: 48em) {
+  .imageLogin {
+    display: none;
+  }
+}
+
 .formContainer {
   display: flex;
   justify-content: flex-start;
@@ -38,8 +44,14 @@
   border-radius: 0;
   background: linear-gradient(180deg, #a39787 30%, #c3c3cb 100%);
 
-  @media (max-width: 48em) {
+  /* @media (max-width: 48em) {
     max-width: 100%;
+  } */
+}
+
+@media (max-width: 48em) {
+  .form {
+    width: 100vw; 
   }
 }
 
