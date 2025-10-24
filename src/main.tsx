@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from "./pages/Login/Login.tsx"
 import  Error  from "./pages/Erro404/NotFoundPage.tsx"
 import TestPage from "./Components/employeeModal/testPage.tsx"
+import { UserSettings } from "./pages/UserSettings/UserSettings.tsx"
 
 dayjs.locale("pt-br")
 
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/erro",
     element: <Error />,
+  },
+  {
+    path: "/userset",
+    element: <UserSettings/>
   },
   {
     path: "/testpage",
