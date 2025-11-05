@@ -1,0 +1,305 @@
+.container {
+  background: linear-gradient(135deg, #b6a692 0%, #8c7a63 100%);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    transparent 100%);
+}
+
+.title {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  font-size: 1.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.8), 
+    transparent);
+  border-radius: 2px;
+}
+
+.calendarWrapper {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 
+    inset 0 2px 20px rgba(255, 255, 255, 0.05),
+    0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ---- FullCalendar Base ---- */
+:global(.fc) {
+  background: transparent;
+  border-radius: 16px;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+:global(.fc .fc-toolbar) {
+  margin-bottom: 2rem;
+}
+
+:global(.fc .fc-toolbar-title) {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.5px;
+}
+
+/* ---- Botões Melhorados ---- */
+:global(.fc-button) {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.1) 100%) !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.6rem 1.2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+:global(.fc-button::before) {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+:global(.fc-button:hover::before) {
+  left: 100%;
+}
+
+:global(.fc-button:hover) {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.25) 0%, 
+    rgba(255, 255, 255, 0.2) 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+:global(.fc-button:active) {
+  transform: translateY(0);
+}
+
+:global(.fc-button-active) {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.35) 0%, 
+    rgba(255, 255, 255, 0.25) 100%) !important;
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Cabeçalho de dias ---- */
+:global(.fc-col-header-cell) {
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  padding: 1rem 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+:global(.fc-col-header-cell-cushion) {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+:global(.fc-col-header-cell-cushion:hover) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Números dos dias ---- */
+:global(.fc-daygrid-day-number) {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+:global(.fc-daygrid-day-number:hover) {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+/* ---- Células do calendário ---- */
+:global(.fc-daygrid-day) {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+:global(.fc-daygrid-day:hover) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+:global(.fc-day-today) {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+:global(.fc-day-today .fc-daygrid-day-number) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* ---- Eventos coloridos ---- */
+:global(.fc-event) {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+:global(.fc-event::before) {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+:global(.fc-event:hover) {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+:global(.fc-event .fc-event-main) {
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.frontend {
+  background: linear-gradient(135deg, #a78bfa 0%, #7e5ff5 100%);
+}
+
+.planning {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.backend {
+  background: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 100%);
+}
+
+.design {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.qa {
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+}
+
+/* ---- Linhas e bordas ---- */
+:global(.fc-theme-standard td),
+:global(.fc-theme-standard th) {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+:global(.fc-scrollgrid) {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ---- Time Grid ---- */
+:global(.fc-timegrid-slot) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+:global(.fc-timegrid-now-indicator-line) {
+  border-color: #ef4444;
+  border-width: 2px;
+}
+
+/* ---- Scrollbar customizada ---- */
+:global(::-webkit-scrollbar) {
+  width: 8px;
+}
+
+:global(::-webkit-scrollbar-track) {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+:global(::-webkit-scrollbar-thumb) {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+:global(::-webkit-scrollbar-thumb:hover) {
+  background: rgba(255, 255, 255, 0.3);
+}

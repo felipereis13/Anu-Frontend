@@ -11,6 +11,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from "./pages/Login/Login.tsx"
 import  Error  from "./pages/Erro404/NotFoundPage.tsx"
 import TestPage from "./Components/employeeModal/testPage.tsx"
+import Dashboard from "./pages/Dashboard/Dashboard.tsx"
 
 dayjs.locale("pt-br")
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/testpage",
     element: <TestPage />,
+  },
+  {
+    path: "/agenda",
+    element: <Dashboard />
   }
   /*   {
     path: "/funcionario",
