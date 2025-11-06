@@ -9,6 +9,7 @@ import {
 } from "@mantine/core"
 import { DatePickerInput } from "@mantine/dates"
 import { useState } from "react"
+import "@mantine/dates/styles.css"
 
 interface EmployeeDrawerProps {
   opened: boolean
