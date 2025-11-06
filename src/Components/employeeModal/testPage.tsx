@@ -2,9 +2,13 @@ import React from "react"
 import { Button, Container, Title, Group, Text } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
 import EmployeeModal from "./EmployeeModal"
+import EmployeeDrawer from "./EmployeeDrawer"
 
 export default function TestPage() {
-  const [opened, { open, close }] = useDisclosure(false)
+  const [openedDrawer, { open: openDrawer, close: closeDrawer }] =
+    useDisclosure(false)
+  const [openedModal, { open: openModal, close: closeModal }] =
+    useDisclosure(false)
   const [lastData, setLastData] = React.useState<any | null>(null)
 
   return (
@@ -14,10 +18,24 @@ export default function TestPage() {
       </Title>
 
       <Group mb="lg">
-        <Button color="teal" onClick={open}>
+        <Button color="teal" onClick={openDrawer}>
           Novo Funcionário
         </Button>
+        <Button onClick={openModal}>Cadastrar Funcionário</Button>
       </Group>
+
+      {/* Drawer lateral */}
+      <EmployeeDrawer opened={openedDrawer} onClose={closeDrawer} />
+
+      {/* Modal central */}
+      <EmployeeModal
+        opened={openedModal}
+        onClose={closeModal}
+        onSubmit={(values) => {
+          console.log("✅ Dados recebidos:", values)
+          setLastData(values)
+        }}
+      />
 
       {lastData ? (
         <>
@@ -40,15 +58,6 @@ export default function TestPage() {
       ) : (
         <Text c="dimmed">Nenhum cadastro enviado ainda.</Text>
       )}
-
-      <EmployeeModal
-        opened={opened}
-        onClose={close}
-        onSubmit={(values) => {
-          console.log("✅ Dados recebidos:", values)
-          setLastData(values)
-        }}
-      />
     </Container>
   )
 }
