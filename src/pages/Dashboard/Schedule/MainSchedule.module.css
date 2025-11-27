@@ -10,6 +10,7 @@
 /* --- CABEÇALHO ATUALIZADO --- */
 .headerContainer {
     height: 80px;
+    width: 100vw;
     background-color: #A39787;
     flex-shrink: 0;
     position: sticky;

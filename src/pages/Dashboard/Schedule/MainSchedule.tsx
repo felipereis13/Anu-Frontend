@@ -2,7 +2,8 @@
 import { Group, Text, Box, Divider } from '@mantine/core';
 import classes from './MainSchedule.module.css';
 import { employeesData } from '../../../data/employees';
-import { tasksData, categoryLabels } from '../../../data/employees'; // Importar type Task
+import { tasksData, categoryLabels } from '../../../data/employees';
+import type { Task } from '../../../data/employees';
 
 // Dados da semana
 const weekDays = [
@@ -21,15 +22,12 @@ function ScheduleHeader() {
             <Text className={classes.monthLabel}>
                 OUT
             </Text>
+
             <div className={classes.daysContainer}>
                 {weekDays.map((item) => (
                     <Box key={item.date} className={classes.dayColumn}>
-                        <Text className={classes.dayText}>
-                            {item.day}
-                        </Text>
-                        <Text className={classes.dateText}>
-                            {item.date}
-                        </Text>
+                        <Text className={classes.dayText}>{item.day}</Text>
+                        <Text className={classes.dateText}>{item.date}</Text>
                     </Box>
                 ))}
             </div>
@@ -38,20 +36,20 @@ function ScheduleHeader() {
 }
 
 // --- COMPONENTE DE TAREFA ---
-function TaskItem({ task }: { task: any }) {
-    // Encontrar a linha do funcionário
+function TaskItem({ task }: { task: Task }) {
+    // Linha do funcionário
     const employeeIndex = employeesData.findIndex(emp => emp.name === task.employeeName);
     if (employeeIndex === -1) return null;
 
-    // Calcular posição e largura baseada nas datas
+    // Índices de início e fim na semana
     const startDayIndex = weekDays.findIndex(day => day.date === task.startDate);
     const endDayIndex = weekDays.findIndex(day => day.date === task.endDate);
-    
+
     if (startDayIndex === -1 || endDayIndex === -1) return null;
 
     const left = `calc(${(startDayIndex / weekDays.length) * 100}% + 2px)`;
     const width = `calc(${((endDayIndex - startDayIndex + 1) / weekDays.length) * 100}% - 4px)`;
-    const top = `calc(${employeeIndex * 100}px + 20px)`; // 20px de margem top
+    const top = `calc(${employeeIndex * 100}px + 20px)`; // altura dinâmica por funcionário
 
     return (
         <Box
@@ -64,13 +62,10 @@ function TaskItem({ task }: { task: any }) {
             }}
         >
             <div className={classes.taskContent}>
-                <Text className={classes.taskTitle}>
-                    {task.title}
-                </Text>
-                <Text className={classes.taskCompany}>
-                    {task.company}
-                </Text>
+                <Text className={classes.taskTitle}>{task.title}</Text>
+                <Text className={classes.taskCompany}>{task.company}</Text>
             </div>
+
             <Text className={classes.taskCategory}>
                 {categoryLabels[task.category]}
             </Text>
@@ -82,11 +77,11 @@ function TaskItem({ task }: { task: any }) {
 function ScheduleGrid() {
     return (
         <div className={classes.gridContainer}>
-            
+
             {/* Células do grid */}
-            {employeesData.map((_, rowIndex) => (
+            {employeesData.map((_, rowIndex) =>
                 weekDays.map((_, colIndex) => (
-                    <div 
+                    <div
                         key={`cell-${rowIndex}-${colIndex}`}
                         className={classes.gridCell}
                         style={{
@@ -95,32 +90,32 @@ function ScheduleGrid() {
                         }}
                     />
                 ))
-            ))}
+            )}
 
-            {/* Linhas Horizontais */}
+            {/* Linhas horizontais */}
             {employeesData.map((_, index) => (
-                <Divider 
-                    key={`row-${index}`} 
+                <Divider
+                    key={`row-${index}`}
                     className={classes.employeeRowDivider}
                     style={{ gridRow: index + 1 }}
                 />
             ))}
 
-            {/* Linhas Verticais */}
+            {/* Linhas verticais */}
             {weekDays.map((_, index) => (
-                <Divider 
-                    key={`col-${index}`} 
+                <Divider
+                    key={`col-${index}`}
                     className={classes.dayColumnDivider}
                     style={{ gridColumn: index + 1 }}
-                    orientation="vertical" 
+                    orientation="vertical"
                 />
             ))}
 
             {/* Tarefas */}
-            {tasksData.map((task) => (
+            {tasksData.map(task => (
                 <TaskItem key={task.id} task={task} />
             ))}
-            
+
         </div>
     );
 }
@@ -129,7 +124,7 @@ function ScheduleGrid() {
 export function MainSchedule() {
     return (
         <div className={classes.mainScheduleContainer}>
-            <ScheduleHeader /> 
+            <ScheduleHeader />
             <ScheduleGrid />
         </div>
     );
