@@ -17,6 +17,8 @@
     "@fullcalendar/interaction": "^6.1.19",
     "@fullcalendar/list": "^6.1.19",
     "@fullcalendar/react": "^6.1.19",
+    "@fullcalendar/resource": "^6.1.19",
+    "@fullcalendar/resource-timeline": "^6.1.19",
     "@fullcalendar/timegrid": "^6.1.19",
     "@mantine/carousel": "^8.3.5",
     "@mantine/charts": "^8.3.5",

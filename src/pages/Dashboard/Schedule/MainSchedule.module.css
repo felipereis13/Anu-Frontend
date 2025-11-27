@@ -1,0 +1,195 @@
+/* Container principal do cronograma */
+.mainScheduleContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    background-color: #F8F7F5;
+}
+
+/* --- CABEÇALHO ATUALIZADO --- */
+.headerContainer {
+    height: 80px;
+    background-color: #A39787;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border-bottom: 2px solid white;
+}
+
+.monthLabel {
+    color: white;
+    font-weight: 800;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Container para os dias da semana */
+.daysContainer {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.dayColumn {
+    flex: 1;
+    min-width: 120px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.dayColumn:last-child {
+    border-right: none;
+}
+
+.dayText {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.dateText {
+    color: white;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+/* --- GRADE DE HORÁRIOS SINCRONIZADA --- */
+.gridContainer {
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(5, 100px); /* Altura aumentada para melhor alinhamento */
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+    min-width: max-content;
+}
+
+/* Linhas Horizontais da Grade - Mais limpas */
+.employeeRowDivider {
+    grid-column: 1 / -1;
+    border-color: white !important;
+    border-width: 1px !important; /* Linha mais fina */
+    margin: 0 !important;
+    align-self: end;
+}
+
+/* Linhas Verticais da Grade */
+.dayColumnDivider {
+    grid-row: 1 / -1;
+    height: 100%;
+    border-color: white !important;
+    border-width: 1px !important; /* Linha mais fina */
+    margin: 0 !important;
+}
+
+.dayColumnDivider:last-child {
+    display: none; /* Remove a última linha vertical */
+}
+
+/* Células vazias para os horários */
+.scheduleCell {
+    background-color: #F8F7F5;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.scheduleCell:nth-child(6n) {
+    border-right: none; /* Remove borda direita da última coluna */
+}
+
+/* MainSchedule.module.css - Adicionar estas classes */
+
+/* Container da tarefa */
+.taskContainer {
+    position: absolute;
+    height: 60px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    margin: 4px 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.taskContainer:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Conteúdo da tarefa */
+.taskContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+
+.taskTitle {
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.taskCompany {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 0.65rem;
+    line-height: 1.2;
+}
+
+.taskCategory {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+/* Ajustes no grid container para posicionamento absoluto */
+.gridContainer {
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(5, 100px);
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+    min-width: max-content;
+}
+
+/* Células do grid para referência de posicionamento */
+.gridCell {
+    background-color: #F8F7F5;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.gridCell:nth-child(6n) {
+    border-right: none;
+}

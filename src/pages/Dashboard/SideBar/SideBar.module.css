@@ -1,0 +1,90 @@
+/* Container principal da sidebar/lista */
+.sidebarContainer {
+    width: 300px; 
+    background-color: white;
+    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05);
+    height: 100vh;
+    margin-left: 80px;
+}
+
+.listHeader {
+    height: 80px;
+    align-items: center;
+    border-bottom: 1px solid var(--mantine-color-gray-3);
+}
+
+.employeeList {
+    padding: 0;
+}
+
+/* Container do item da lista */
+.listItemContainer {
+    height: 100px; /* Mesma altura do grid para alinhamento perfeito */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--mantine-spacing-md);
+    cursor: pointer;
+    transition: background-color 150ms ease;
+    border-bottom: 1px solid var(--mantine-color-gray-2);
+}
+
+.listItemContainer:hover {
+    background-color: var(--mantine-color-gray-0);
+}
+
+.listItemContainer:last-child {
+    border-bottom: none;
+}
+
+/* Item da lista - layout mais compacto e alinhado */
+.listItem {
+    margin: 0;
+    padding: 0;
+}
+
+/* Avatar ajustado */
+.avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+}
+
+/* Textos alinhados */
+.nameText {
+    color: #2D2A24; /* Cor mais escura para melhor contraste */
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.roleText {
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.companyTagWrapper {
+    margin-top: 2px;
+}
+
+/* Tag da Empresa - mais compacta */
+.companyTag {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #4c443b;
+    border: 1px solid #DED8D0;
+    background-color: #F5F2EF;
+    line-height: 1.2;
+}
+
+/* Divisor removido pois agora usamos border-bottom */
+.listItemContainer .mantine-Divider-root {
+    display: none;
+}
