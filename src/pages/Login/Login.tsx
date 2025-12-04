@@ -6,8 +6,10 @@ import {
   TextInput,
   Title,
   Image as MantineImage,
+  Text,
 } from "@mantine/core";
 import { useForm } from '@mantine/form';
+import { useState } from 'react';
 import classes from "./Login.module.css";
 import logoAnu from "../../icons figma/ANU-LOGO-LOGIN.png";
 import imageLogin from "../../assets/anuBranco-capa-login.jpg";
@@ -15,6 +17,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Login() {
+  const [error, setError] = useState<string | null>(null);
   const form = useForm({
     initialValues: {
       email: '',
@@ -33,9 +36,12 @@ export function Login() {
   const from = (location.state as { from?: { pathname?: string } } | null)?.from?.pathname || '/cronograma';
 
   async function handleSubmit(values: { email: string; password: string; keepConnected: boolean }) {
+    setError(null);
     const ok = await login(values.email, values.password, values.keepConnected);
     if (ok) {
       navigate(from, { replace: true });
+    } else {
+      setError('Email ou senha inválidos. Verifique suas credenciais.');
     }
   }
 
@@ -54,6 +60,12 @@ export function Login() {
             <Title order={2} className={classes.title}>
               Que bom ter você de volta!
             </Title>
+
+            {error && (
+              <Text c="red" size="sm" mt="md" style={{ textAlign: 'center' }}>
+                {error}
+              </Text>
+            )}
 
             <form onSubmit={form.onSubmit(handleSubmit)}>
               <TextInput

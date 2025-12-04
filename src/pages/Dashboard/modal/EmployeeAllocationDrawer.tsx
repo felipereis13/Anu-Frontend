@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IconPlus, IconTrash } from "@tabler/icons-react";
 
 interface Empresa {
@@ -43,6 +43,7 @@ interface EmployeeAllocationDrawerProps {
   opened: boolean;
   onClose: () => void;
   empresasDisponiveis: Empresa[];
+  existingAllocations?: Alocacao[]; // Add existing allocations prop
   onSubmit: (data: EmployeeAllocationResult) => void;
 }
 
@@ -50,6 +51,7 @@ export default function EmployeeAllocationDrawer({
   opened,
   onClose,
   empresasDisponiveis,
+  existingAllocations = [],
   onSubmit,
 }: EmployeeAllocationDrawerProps) {
   const [alocacoes, setAlocacoes] = useState<Alocacao[]>([]);
@@ -62,16 +64,31 @@ export default function EmployeeAllocationDrawer({
     { dataInicio: null, dataFim: null },
   ]);
 
+  // Populate drawer with existing allocations only when it opens (not on subsequent updates)
+  useEffect(() => {
+    if (opened) {
+      console.log("🔄 Drawer aberto - carregando alocações existentes:", existingAllocations);
+      if (existingAllocations.length > 0) {
+        setAlocacoes(existingAllocations);
+      } else {
+        setAlocacoes([]);
+      }
+    }
+  }, [opened, existingAllocations]);
+
   const adicionarAlocacao = () => {
-    setAlocacoes((prev) => [
-      ...prev,
-      {
-        empresa: "",
-        dataInicio: null,
-        dataFim: null,
-        cargaHorariaSemanal: "",
-      },
-    ]);
+    const novaAlocacao: Alocacao = {
+      empresa: "",
+      dataInicio: null,
+      dataFim: null,
+      cargaHorariaSemanal: "",
+    };
+    console.log("➕ Adicionando nova alocação ao drawer:", novaAlocacao);
+    setAlocacoes((prev) => {
+      const updated = [...prev, novaAlocacao];
+      console.log("📋 Estado de alocações após adicionar:", updated);
+      return updated;
+    });
   };
 
   const removerAlocacao = (index: number) => {
@@ -135,7 +152,8 @@ export default function EmployeeAllocationDrawer({
       licencasMedicas,
     };
 
-    console.log("📦 Dados do drawer:", payload);
+    console.log("📦 Dados do drawer - ALOCACOES:", alocacoes);
+    console.log("📦 Dados do drawer - PAYLOAD COMPLETO:", payload);
     onSubmit(payload); // aqui o pai pode preencher automaticamente o cadastro
     onClose();
   };

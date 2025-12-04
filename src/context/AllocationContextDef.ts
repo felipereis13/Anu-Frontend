@@ -8,6 +8,7 @@ export interface Allocation {
   startDate: string;
   endDate: string;
   color: string;
+  cargaHorariaSemanal?: number; // Weekly hours for this allocation
 }
 
 interface AllocationContextType {

@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import {Container,Text,ScrollArea,Table,TextInput,UnstyledButton,Group,Center,Pagination,MultiSelect,Button,Modal,Paper, ThemeIcon, Badge, } from '@mantine/core';
+import { useState, useEffect } from 'react';
+import {Container,Text,ScrollArea,Table,TextInput,UnstyledButton,Group,Center,Pagination,MultiSelect,Button,Modal,Paper, ThemeIcon, Badge } from '@mantine/core';
 import {IconChevronDown,IconChevronUp,IconSearch,IconSelector,IconX,IconDownload,IconPlus,IconUserCircle, IconBuildingCommunity, IconPhone, IconUsers, IconTag, IconBriefcase, } from '@tabler/icons-react';
 import classes from './Funcionario.module.css';
 import { Nav } from '../../Components/Nav/Nav';
@@ -10,6 +10,7 @@ import { useAllocations } from '../../context/useAllocations';
 import { useDisclosure } from '@mantine/hooks';
 import dayjs from 'dayjs';
 import { HeaderSearch } from '../../Components/search/Search';
+import { getCompanyColor } from '../../utils/colors';
 
 interface RowData {
   name: string;
@@ -137,75 +138,12 @@ function sortData(
   );
 }
 
-const data: RowData[] = [
-  { name: 'Athena Weissnat', departamento: 'TI', projeto: 'Anatel', disponibilidade: 'Disponível', company: 'Tech Solutions', funcao: 'Desenvolvedora', tags: 'React, Node.js', telefone: '(11) 99999-1111', gerente: 'Carlos Lima' },
-  { name: 'Liam Kuhlman', departamento: 'Marketing', projeto: 'Google', disponibilidade: 'Indisponível', company: 'Market Experts', funcao: 'Analista de Marketing', tags: 'SEO, Google Ads', telefone: '(11) 98888-2222', gerente: 'Fernanda Souza' },
-  { name: 'Olivia Prosacco', departamento: 'Financeiro', projeto: 'Banco do Brasil', disponibilidade: 'Disponível', company: 'Finance Corp', funcao: 'Contadora', tags: 'Excel, SAP', telefone: '(21) 97777-3333', gerente: 'João Pereira' },
-  { name: 'Noah Wiza', departamento: 'Recursos Humanos', projeto: 'Ambev', disponibilidade: 'Disponível', company: 'HR Solutions', funcao: 'Recrutador', tags: 'Entrevistas, Onboarding', telefone: '(31) 96666-4444', gerente: 'Patrícia Gomes' },
-  { name: 'Ava McGlynn', departamento: 'Vendas', projeto: 'Magazine Luiza', disponibilidade: 'Indisponível', company: 'Sales Pros', funcao: 'Representante de Vendas', tags: 'CRM, Negociação', telefone: '(41) 95555-5555', gerente: 'Rafael Nogueira' },
-  { name: 'Elijah Koss', departamento: 'Logística', projeto: 'Correios', disponibilidade: 'Disponível', company: 'LogiTrans', funcao: 'Coordenador de Logística', tags: 'Supply Chain, Transporte', telefone: '(81) 94444-6666', gerente: 'Ana Bezerra' },
-  { name: 'Sophia Bogan', departamento: 'Atendimento ao Cliente', projeto: 'Nubank', disponibilidade: 'Disponível', company: 'Client First', funcao: 'Atendente', tags: 'Suporte, CRM', telefone: '(85) 93333-7777', gerente: 'Ricardo Monteiro' },
-  { name: 'James Schaden', departamento: 'Desenvolvimento de Produto', projeto: 'iFood', disponibilidade: 'Indisponível', company: 'Product Innovators', funcao: 'Gerente de Produto', tags: 'Agile, UX/UI', telefone: '(71) 92222-8888', gerente: 'Carlos Lima' },
-  { name: 'Isabella Kautzer', departamento: 'Design', projeto: '99', disponibilidade: 'Disponível', company: 'Creative Minds', funcao: 'Designer Gráfico', tags: 'Photoshop, Illustrator', telefone: '(11) 91111-9999', gerente: 'Fernanda Souza' },
-  { name: 'Benjamin OKon', departamento: 'Jurídico', projeto: 'Petrobras', disponibilidade: 'Disponível', company: 'Legal Experts', funcao: 'Advogado', tags: 'Contratos, Compliance', telefone: '(51) 90000-1234', gerente: 'João Pereira' },
-  { name: 'Mia Ziemann', departamento: 'Pesquisa e Desenvolvimento', projeto: 'Embraer', disponibilidade: 'Indisponível', company: 'Innovatech', funcao: 'Cientista de Dados', tags: 'Python, Machine Learning', telefone: '(61) 98888-5678', gerente: 'Patrícia Gomes' },
-  { name: 'Lucas Kiehn', departamento: 'Operações', projeto: 'Vale', disponibilidade: 'Disponível', company: 'Ops Solutions', funcao: 'Analista de Operações', tags: 'Processos, Eficiência', telefone: '(31) 97777-6789', gerente: 'Rafael Nogueira' },
-  { name: 'Charlotte Blick', departamento: 'Comunicação', projeto: 'Globo', disponibilidade: 'Disponível', company: 'Comms Agency', funcao: 'Especialista em Comunicação', tags: 'Mídias Sociais, Relações Públicas', telefone: '(21) 96666-7890', gerente: 'Ana Bezerra' },
-  { name: 'Henry OConnell', departamento: 'Segurança da Informação', projeto: 'Banco Itaú', disponibilidade: 'Indisponível', company: 'SecureTech', funcao: 'Analista de Segurança', tags: 'Firewall, VPN', telefone: '(11) 95555-8901', gerente: 'Ricardo Monteiro' },
-  { name: 'Amelia Runte', departamento: 'Qualidade', projeto: 'Braskem', disponibilidade: 'Disponível', company: 'Quality First', funcao: 'Engenheira de Qualidade', tags: 'ISO, Auditoria', telefone: '(81) 94444-9012', gerente: 'Carlos Lima' },
-  { name: 'Alexander Witting', departamento: 'Pesquisa de Mercado', projeto: 'Coca-Cola', disponibilidade: 'Disponível', company: 'Market Insights', funcao: 'Pesquisador de Mercado', tags: 'SPSS, Análise de Dados', telefone: '(41) 93333-0123', gerente: 'Fernanda Souza' },
-  { name: 'Evelyn Kulas', departamento: 'Sustentabilidade', projeto: 'Natura', disponibilidade: 'Indisponível', company: 'Green Solutions', funcao: 'Coordenadora de Sustentabilidade', tags: 'Meio Ambiente, RSE', telefone: '(85) 92222-1234', gerente: 'João Pereira' },
-  { name: 'Daniela McClure', departamento: 'Eventos', projeto: 'Rock in Rio', disponibilidade: 'Disponível', company: 'Event Masters', funcao: 'Organizadora de Eventos', tags: 'Logística, Planejamento', telefone: '(71) 91111-2345', gerente: 'Patrícia Gomes' },
-  { name: 'Matthew Gleichner', departamento: 'Inovação', projeto: 'Startup XYZ', disponibilidade: 'Disponível', company: 'Future Tech', funcao: 'Especialista em Inovação', tags: 'Trends, Tecnologia', telefone: '(61) 90000-3456', gerente: 'Rafael Nogueira' },
-  { name: 'Harper Kiehn', departamento: 'Treinamento e Desenvolvimento', projeto: 'Universidade ABC', disponibilidade: 'Indisponível', company: 'Learn & Grow', funcao: 'Instrutora', tags: 'Workshops, E-learning', telefone: '(51) 98888-4567', gerente: 'Ana Bezerra' },
-  { name: 'Josephine OConnell', departamento: 'Administração', projeto: 'Prefeitura Municipal', disponibilidade: 'Disponível', company: 'Admin Solutions', funcao: 'Assistente Administrativo', tags: 'Organização, Gestão de Documentos', telefone: '(31) 97777-5678', gerente: 'Ricardo Monteiro' },
-  { name: 'Samuel Prosacco', departamento: 'Pesquisa Clínica', projeto: 'Hospital XYZ', disponibilidade: 'Disponível', company: 'Health Research', funcao: 'Pesquisador Clínico', tags: 'Ensaios Clínicos, Ética', telefone: '(21) 96666-6789', gerente: 'Carlos Lima' },
-  { name: 'Ella Kautzer', departamento: 'Engenharia', projeto: 'Construtora ABC', disponibilidade: 'Indisponível', company: 'BuildTech', funcao: 'Engenheira Civil', tags: 'AutoCAD, Projetos', telefone: '(11) 95555-7890', gerente: 'Fernanda Souza' },
-  { name: 'David Schaden', departamento: 'Manutenção', projeto: 'Usina XYZ', disponibilidade: 'Disponível', company: 'MaintainIt', funcao: 'Técnico de Manutenção', tags: 'Reparos, Preventiva', telefone: '(81) 94444-8901', gerente: 'João Pereira' },
-  { name: 'Scarlett Ziemann', departamento: 'Pesquisa de Operações', projeto: 'Empresa 123', disponibilidade: 'Disponível', company: 'Ops Research', funcao: 'Analista de Pesquisa Operacional', tags: 'Modelagem, Simulação', telefone: '(41) 93333-9012', gerente: 'Patrícia Gomes' },
-  { name: 'Carter Wiza', departamento: 'Desenvolvimento Sustentável', projeto: 'ONG Verde', disponibilidade: 'Indisponível', company: 'Sustainability Co.', funcao: 'Especialista em Desenvolvimento Sustentável', tags: 'Projetos Verdes, RSE', telefone: '(85) 92222-0123', gerente: 'Rafael Nogueira' },
-  { name: 'Victoria McGlynn', departamento: 'Comunidade e Relações Públicas', projeto: 'Instituição ABC', disponibilidade: 'Disponível', company: 'Community Connect', funcao: 'Coordenadora de Relações Comunitárias', tags: 'Engajamento, Comunicação', telefone: '(71) 91111-1234', gerente: 'Ana Bezerra' },
-  { name: 'Owen Koss', departamento: 'Pesquisa Tecnológica', projeto: 'Laboratório XYZ', disponibilidade: 'Disponível', company: 'Tech Research', funcao: 'Pesquisador Tecnológico', tags: 'Inovação, Desenvolvimento', telefone: '(61) 90000-2345', gerente: 'Ricardo Monteiro' },
-  { name: 'Lily Blick', departamento: 'Desenvolvimento Organizacional', projeto: 'Empresa 456', disponibilidade: 'Indisponível', company: 'Org Dev Co.', funcao: 'Consultora de Desenvolvimento Organizacional', tags: 'Mudança, Cultura', telefone: '(51) 98888-3456', gerente: 'Carlos Lima' },
-  { name: 'Jack OKon', departamento: 'Relações Internacionais', projeto: 'Corp Global', disponibilidade: 'Disponível', company: 'Global Connect', funcao: 'Analista de Relações Internacionais', tags: 'Negociações, Parcerias', telefone: '(31) 97777-4567', gerente: 'Fernanda Souza' },
-  { name: 'Zoey Runte', departamento: 'Comunicação Interna', projeto: 'Empresa 789', disponibilidade: 'Disponível', company: 'Internal Comms', funcao: 'Especialista em Comunicação Interna', tags: 'Engajamento, Mídias Internas', telefone: '(21) 96666-5678', gerente: 'João Pereira' },
-];
-
-function convertToCSV(data: RowData[]): string {
-  if (data.length === 0) return '';
-
-  const headers = Object.keys(data[0]) as (keyof RowData)[];
-
-  const displayHeaders: { [key in keyof RowData]: string } = {
-    name: 'Nome',
-    departamento: 'Departamento',
-    projeto: 'Projeto',
-    disponibilidade: 'Disponibilidade',
-    company: 'Empresa',
-    funcao: 'Função',
-    tags: 'Tags',
-    telefone: 'Telefone',
-    gerente: 'Gerente',
-  };
-
-  const headerRow = headers.map((key) => `"${displayHeaders[key]}"`).join(';');
-
-  const dataRows = data.map((row) =>
-    headers
-      .map((key) => {
-        let value = String(row[key]);
-        value = value.replace(/"/g, '""');
-        return `"${value}"`;
-      })
-      .join(';')
-  );
-
-  return [headerRow, ...dataRows].join('\n');
-}
-
 export function Funcionario() {
+  const { employees, addEmployee } = useEmployees();
+  const { allocations, addAllocation, removeAllocation } = useAllocations();
+  
   const [search, setSearch] = useState('');
-  const [sortedData, setSortedData] = useState(data);
+  const [sortedData, setSortedData] = useState<RowData[]>([]);
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
   const [activePage, setPage] = useState(1);
@@ -222,37 +160,53 @@ export function Funcionario() {
   const [openNewModal, setOpenNewModal] = useState(false);
   const [allocationDrawerOpened, { open: openAllocationDrawer, close: closeAllocationDrawer }] = useDisclosure(false);
 
-  const { employees, addEmployee } = useEmployees();
-  const { addAllocation } = useAllocations();
-  const syncedRef = useRef(false);
+  // Lista de empresas disponíveis para alocação
+  const empresasDisponiveis = [
+    { value: 'Petrobras', label: 'Petrobras' },
+    { value: 'Vale', label: 'Vale' },
+    { value: 'Banco do Brasil', label: 'Banco do Brasil' },
+    { value: 'Itaú', label: 'Itaú' },
+    { value: 'Bradesco', label: 'Bradesco' },
+    { value: 'Embraer', label: 'Embraer' },
+    { value: 'JBS', label: 'JBS' },
+    { value: 'Ambev', label: 'Ambev' },
+    { value: 'Natura', label: 'Natura' },
+    { value: 'Magazine Luiza', label: 'Magazine Luiza' },
+    { value: 'Globo', label: 'Globo' },
+    { value: 'Rede D\'Or', label: 'Rede D\'Or' },
+    { value: 'Suzano', label: 'Suzano' },
+    { value: 'Gerdau', label: 'Gerdau' },
+    { value: 'Localiza', label: 'Localiza' },
+    { value: 'Anatel', label: 'Anatel' },
+  ];
 
-  // Sync local funcionario `data` entries into global EmployeeContext once
+  // Convert employees from context to RowData format
   useEffect(() => {
-    if (syncedRef.current) return;
-    data.forEach((row) => {
-      const exists = employees.some((e) => e.name === row.name);
-      if (!exists) {
-        addEmployee({
-          name: row.name,
-          role: row.funcao,
-          company: row.company,
-          companyColor: '#EBE7E1',
-        });
-      }
+    const data = employees.map(emp => {
+      const employeeAllocations = allocations.filter(a => a.employeeName === emp.name);
+      const totalHoras = employeeAllocations.reduce((sum, a) => sum + (a.cargaHorariaSemanal || 0), 0);
+      const disponibilidade = totalHoras >= 40 ? 'Indisponível' : 'Disponível';
+      const projeto = employeeAllocations.length > 0 
+        ? employeeAllocations.map(a => a.company).join(', ')
+        : 'N/A';
+
+      return {
+        name: emp.name,
+        departamento: emp.departamento || emp.company,
+        projeto: projeto,
+        disponibilidade: disponibilidade,
+        company: emp.company,
+        funcao: emp.funcao || emp.role,
+        tags: emp.tags?.join(', ') || 'N/A',
+        telefone: emp.telefone || 'N/A',
+        gerente: emp.gerente || 'N/A',
+      };
     });
-    syncedRef.current = true;
-  }, [employees, addEmployee]);
 
-  const itemsPerPage = 10;
-
-  const setSorting = (field: keyof RowData) => {
-    const reversed = field === sortBy ? !reverseSortDirection : false;
-    setReverseSortDirection(reversed);
-    setSortBy(field);
     setSortedData(
       sortData(data, {
-        sortBy: field,
-        reversed,
+        sortBy,
+        reversed: reverseSortDirection,
         search,
         filtroDepartamentos,
         filtroDisponibilidades,
@@ -262,24 +216,19 @@ export function Funcionario() {
         filtroGerentes,
       })
     );
+  }, [employees, allocations, sortBy, reverseSortDirection, search, filtroDepartamentos, filtroDisponibilidades, filtroFuncoes, filtroEmpresas, filtroProjetos, filtroGerentes]);
+
+  const itemsPerPage = 10;
+
+  const setSorting = (field: keyof RowData) => {
+    const reversed = field === sortBy ? !reverseSortDirection : false;
+    setReverseSortDirection(reversed);
+    setSortBy(field);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearch(value);
-    setSortedData(
-      sortData(data, {
-        sortBy,
-        reversed: reverseSortDirection,
-        search: value,
-        filtroDepartamentos,
-        filtroDisponibilidades,
-        filtroFuncoes,
-        filtroEmpresas,
-        filtroProjetos,
-        filtroGerentes,
-      })
-    );
     setPage(1);
   };
 
@@ -291,9 +240,40 @@ export function Funcionario() {
     setFiltroEmpresas([]);
     setFiltroProjetos([]);
     setFiltroGerentes([]);
-    setSortedData(data);
     setPage(1);
   };
+
+  function convertToCSV(data: RowData[]): string {
+    if (data.length === 0) return '';
+
+    const headers = Object.keys(data[0]) as (keyof RowData)[];
+
+    const displayHeaders: { [key in keyof RowData]: string } = {
+      name: 'Nome',
+      departamento: 'Departamento',
+      projeto: 'Projeto',
+      disponibilidade: 'Disponibilidade',
+      company: 'Empresa',
+      funcao: 'Função',
+      tags: 'Tags',
+      telefone: 'Telefone',
+      gerente: 'Gerente',
+    };
+
+    const headerRow = headers.map((key) => `"${displayHeaders[key]}"`).join(';');
+
+    const dataRows = data.map((row) =>
+      headers
+        .map((key) => {
+          let value = String(row[key]);
+          value = value.replace(/"/g, '""');
+          return `"${value}"`;
+        })
+        .join(';')
+    );
+
+    return [headerRow, ...dataRows].join('\n');
+  }
 
   const handleExport = () => {
     if (sortedData.length === 0) {
@@ -397,48 +377,22 @@ export function Funcionario() {
                 <MultiSelect
                   label="Departamento"
                   placeholder="Selecione"
-                  data={[...new Set(data.map((i) => i.departamento))]}
+                  data={[...new Set(sortedData.map((i) => i.departamento))]}
                   value={filtroDepartamentos}
                   onChange={(value) => {
                     setFiltroDepartamentos(value);
-                    setSortedData(
-                      sortData(data, {
-                        sortBy,
-                        reversed: reverseSortDirection,
-                        search,
-                        filtroDepartamentos: value,
-                        filtroDisponibilidades,
-                        filtroFuncoes,
-                        filtroEmpresas,
-                        filtroProjetos,
-                        filtroGerentes,
-                      })
-                    );
                     setPage(1);
                   }}
                   clearable
                 />
 
-                <MultiSelect
+                  <MultiSelect
                   label="Disponibilidade"
                   placeholder="Selecione"
                   data={['Disponível', 'Indisponível']}
                   value={filtroDisponibilidades}
                   onChange={(value) => {
                     setFiltroDisponibilidades(value);
-                    setSortedData(
-                      sortData(data, {
-                        sortBy,
-                        reversed: reverseSortDirection,
-                        search,
-                        filtroDepartamentos,
-                        filtroDisponibilidades: value,
-                        filtroFuncoes,
-                        filtroEmpresas,
-                        filtroProjetos,
-                        filtroGerentes,
-                      })
-                    );
                     setPage(1);
                   }}
                   clearable
@@ -447,23 +401,10 @@ export function Funcionario() {
                 <MultiSelect
                   label="Função"
                   placeholder="Selecione"
-                  data={[...new Set(data.map((i) => i.funcao))]}
+                  data={[...new Set(sortedData.map((i) => i.funcao))]}
                   value={filtroFuncoes}
                   onChange={(value) => {
                     setFiltroFuncoes(value);
-                    setSortedData(
-                      sortData(data, {
-                        sortBy,
-                        reversed: reverseSortDirection,
-                        search,
-                        filtroDepartamentos,
-                        filtroDisponibilidades,
-                        filtroFuncoes: value,
-                        filtroEmpresas,
-                        filtroProjetos,
-                        filtroGerentes,
-                      })
-                    );
                     setPage(1);
                   }}
                   clearable
@@ -472,23 +413,10 @@ export function Funcionario() {
                 <MultiSelect
                   label="Empresa"
                   placeholder="Selecione"
-                  data={[...new Set(data.map((i) => i.company))]}
+                  data={[...new Set(sortedData.map((i) => i.company))]}
                   value={filtroEmpresas}
                   onChange={(value) => {
                     setFiltroEmpresas(value);
-                    setSortedData(
-                      sortData(data, {
-                        sortBy,
-                        reversed: reverseSortDirection,
-                        search,
-                        filtroDepartamentos,
-                        filtroDisponibilidades,
-                        filtroFuncoes,
-                        filtroEmpresas: value,
-                        filtroProjetos,
-                        filtroGerentes,
-                      })
-                    );
                     setPage(1);
                   }}
                   clearable
@@ -497,23 +425,10 @@ export function Funcionario() {
                 <MultiSelect
                   label="Projeto"
                   placeholder="Selecione"
-                  data={[...new Set(data.map((i) => i.projeto))]}
+                  data={[...new Set(sortedData.map((i) => i.projeto))]}
                   value={filtroProjetos}
                   onChange={(value) => {
                     setFiltroProjetos(value);
-                    setSortedData(
-                      sortData(data, {
-                        sortBy,
-                        reversed: reverseSortDirection,
-                        search,
-                        filtroDepartamentos,
-                        filtroDisponibilidades,
-                        filtroFuncoes,
-                        filtroEmpresas,
-                        filtroProjetos: value,
-                        filtroGerentes,
-                      })
-                    );
                     setPage(1);
                   }}
                   clearable
@@ -522,23 +437,10 @@ export function Funcionario() {
                 <MultiSelect
                   label="Gerente"
                   placeholder="Selecione"
-                  data={[...new Set(data.map((i) => i.gerente))]}
+                  data={[...new Set(sortedData.map((i) => i.gerente))]}
                   value={filtroGerentes}
                   onChange={(value) => {
                     setFiltroGerentes(value);
-                    setSortedData(
-                      sortData(data, {
-                        sortBy,
-                        reversed: reverseSortDirection,
-                        search,
-                        filtroDepartamentos,
-                        filtroDisponibilidades,
-                        filtroFuncoes,
-                        filtroEmpresas,
-                        filtroProjetos,
-                        filtroGerentes: value,
-                      })
-                    );
                     setPage(1);
                   }}
                   clearable
@@ -671,9 +573,24 @@ export function Funcionario() {
               </Paper>
               <Paper withBorder p="xs" radius="sm">
                 <Text fz="sm" c="dimmed">
+                  Horas Disponíveis
+                </Text>
+                <Text fw={500} c={40 - allocations.filter(a => a.employeeName === selectedUser.name).reduce((sum, a) => sum + (a.cargaHorariaSemanal || 0), 0) <= 0 ? 'red' : 'green'}>
+                  {40 - allocations.filter(a => a.employeeName === selectedUser.name).reduce((sum, a) => sum + (a.cargaHorariaSemanal || 0), 0)}h / 40h
+                </Text>
+              </Paper>
+            </Group>
+
+            <Group mt="xs" grow>
+              <Paper withBorder p="xs" radius="sm">
+                <Text fz="sm" c="dimmed">
                   Projeto
                 </Text>
-                <Text fw={500}>{selectedUser.projeto}</Text>
+                <Text fw={500}>
+                  {allocations.filter(a => a.employeeName === selectedUser.name).length > 0
+                    ? allocations.filter(a => a.employeeName === selectedUser.name).map(a => a.company).join(', ')
+                    : selectedUser.projeto}
+                </Text>
               </Paper>
             </Group>
 
@@ -733,6 +650,11 @@ export function Funcionario() {
             role: values.funcao,
             company: values.departamento || 'N/A',
             companyColor: '#EBE7E1',
+            departamento: values.departamento,
+            funcao: values.funcao,
+            telefone: values.telefone,
+            gerente: values.gerente,
+            tags: values.tags
           };
           addEmployee(newEmployee);
           setOpenNewModal(false);
@@ -744,24 +666,48 @@ export function Funcionario() {
         <EmployeeAllocationDrawer
           opened={allocationDrawerOpened}
           onClose={closeAllocationDrawer}
-          empresasDisponiveis={[]}
+          empresasDisponiveis={empresasDisponiveis}
+          existingAllocations={
+            allocations
+              .filter(a => a.employeeName === selectedUser.name)
+              .map(a => ({
+                empresa: a.company,
+                dataInicio: a.startDate ? new Date(a.startDate) : null,
+                dataFim: a.endDate ? new Date(a.endDate) : null,
+                cargaHorariaSemanal: a.cargaHorariaSemanal || "",
+              }))
+          }
           onSubmit={(alocacoes) => {
-            // Create an allocation for each company selected
+            console.log('📦 Dados recebidos do drawer:', alocacoes);
+            
+            // Remove old allocations for this employee first
+            const oldAllocations = allocations.filter(a => a.employeeName === selectedUser.name);
+            oldAllocations.forEach(a => removeAllocation(a.id));
+            
+            // Create new allocations for each company selected
             alocacoes.alocacoes.forEach((aloc) => {
-              const id = `${selectedUser.name}-${aloc.empresa}-${Date.now()}`;
-              const startDateStr = aloc.dataInicio ? dayjs(aloc.dataInicio).format('YYYY-MM-DD') : '';
-              const endDateStr = aloc.dataFim ? dayjs(aloc.dataFim).format('YYYY-MM-DD') : '';
+              console.log('💼 Processando alocação:', aloc);
               
-              if (startDateStr && endDateStr && aloc.empresa) {
-                addAllocation({
+              // Only require empresa to be filled
+              if (aloc.empresa) {
+                const id = `${selectedUser.name}-${aloc.empresa}-${Date.now()}-${Math.random()}`;
+                const startDateStr = aloc.dataInicio ? dayjs(aloc.dataInicio).format('YYYY-MM-DD') : '';
+                const endDateStr = aloc.dataFim ? dayjs(aloc.dataFim).format('YYYY-MM-DD') : '';
+                
+                const newAllocation = {
                   id,
                   employeeName: selectedUser.name,
                   company: aloc.empresa,
                   title: `Alocado na ${aloc.empresa}`,
                   startDate: startDateStr,
                   endDate: endDateStr,
-                  color: '#4F46E5',
-                });
+                  color: getCompanyColor(aloc.empresa),
+                  cargaHorariaSemanal: typeof aloc.cargaHorariaSemanal === 'number' ? aloc.cargaHorariaSemanal : 0,
+                };
+                console.log('✅ Adicionando alocação:', newAllocation);
+                addAllocation(newAllocation);
+              } else {
+                console.warn('⚠️ Alocação ignorada - empresa não informada:', aloc);
               }
             });
             closeAllocationDrawer();

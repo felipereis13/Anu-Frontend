@@ -9,14 +9,7 @@ import { useState, useEffect } from 'react';
 import { useMediaQuery, useDisclosure } from '@mantine/hooks';
 import classes from './SideBar.module.css';
 import EmployeeModal from '../modal/EmployeeModal';
-import { useEmployees } from '../../../context/EmployeeContext';
-
-interface Employee {
-    name: string;
-    role: string;
-    company: string;
-    companyColor: string;
-}
+import { useEmployees, type Employee } from '../../../context/EmployeeContext';
 
 interface SideBarProps {
     selectedEmployees: Set<string>;
@@ -139,7 +132,12 @@ export function SideBar({ selectedEmployees, onToggleEmployee, onClearFilters }:
                         name: values.nome,
                         role: values.funcao,
                         company: values.departamento || 'N/A',
-                        companyColor: '#EBE7E1'
+                        companyColor: '#EBE7E1',
+                        departamento: values.departamento,
+                        funcao: values.funcao,
+                        telefone: values.telefone,
+                        gerente: values.gerente,
+                        tags: values.tags
                     };
                     // Add employee to context state
                     addEmployee(newEmployee);
