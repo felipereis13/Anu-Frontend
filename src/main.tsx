@@ -18,6 +18,7 @@ import { Login } from "./pages/Login/Login.tsx"
 import Error from "./pages/Erro404/NotFoundPage.tsx"
 import TestPage from "./Components/employeeModal/testPage.tsx"
 import { DashboardPage } from "./pages/Dashboard/DashboardPage.tsx"
+import { EmployeeProvider } from "./context/EmployeeContext.tsx"
 
 
 const router = createBrowserRouter([
@@ -46,10 +47,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <MantineProvider>
-      <DatesProvider settings={{ locale: "pt-br", firstDayOfWeek: 0 }}>
-        <RouterProvider router={router} />
-      </DatesProvider>
-    </MantineProvider>
+    <EmployeeProvider>
+      <MantineProvider>
+        <DatesProvider settings={{ locale: "pt-br", firstDayOfWeek: 0 }}>
+          <RouterProvider router={router} />
+        </DatesProvider>
+      </MantineProvider>
+    </EmployeeProvider>
   </StrictMode>
 )

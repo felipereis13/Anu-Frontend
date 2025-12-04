@@ -1,0 +1,253 @@
+/* MonthSchedule.module.css */
+
+.monthScheduleContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    background-color: #F8F7F5;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .monthScheduleContainer {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .monthScheduleContainer {
+        padding: 8px;
+    }
+}
+
+.monthHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #A39787;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .monthHeader {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .monthHeader {
+        padding: 10px;
+    }
+}
+
+.monthTitle {
+    color: white;
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .monthTitle {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .monthTitle {
+        font-size: 1.2rem;
+    }
+}
+
+.monthContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Cabeçalho com dias da semana */
+.weekDaysHeader {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #EBE7E1;
+    border-bottom: 2px solid #A39787;
+}
+
+.weekDayCell {
+    padding: 12px;
+    text-align: center;
+    border-right: 1px solid #DED8D0;
+}
+
+@media (max-width: 768px) {
+    .weekDayCell {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .weekDayCell {
+        padding: 4px;
+    }
+}
+
+.weekDayCell:last-child {
+    border-right: none;
+}
+
+.weekDayText {
+    color: #2D2A24;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+/* Grid de dias */
+.daysGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex-grow: 1;
+    gap: 1px;
+    padding: 1px;
+    background-color: #DED8D0;
+}
+
+.dayCell {
+    background-color: white;
+    padding: 12px;
+    min-height: 100px;
+    border: 1px solid #DED8D0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .dayCell {
+        padding: 8px;
+        min-height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dayCell {
+        padding: 6px;
+        min-height: 70px;
+    }
+}
+
+.dayCell.today {
+    background-color: #FFF8F0;
+    border: 2px solid #A39787;
+}
+
+.dayNumber {
+    font-weight: 700;
+    color: #2D2A24;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .dayNumber {
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dayNumber {
+        font-size: 0.8rem;
+        margin-bottom: 2px;
+    }
+}
+
+.tasksInDay {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+}
+
+.monthTaskTag {
+    padding: 4px 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .monthTaskTag {
+        padding: 3px 4px;
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .monthTaskTag {
+        padding: 2px 3px;
+        font-size: 0.55rem;
+    }
+}
+
+.monthTaskTag:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.monthTaskText {
+    color: white;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .monthScheduleContainer {
+        padding: 10px;
+    }
+
+    .dayCell {
+        min-height: 80px;
+        padding: 8px;
+    }
+
+    .monthTaskText {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .monthScheduleContainer {
+        padding: 5px;
+    }
+
+    .monthTitle {
+        font-size: 1.5rem;
+    }
+
+    .dayCell {
+        min-height: 60px;
+        padding: 4px;
+    }
+
+    .dayNumber {
+        font-size: 0.9rem;
+    }
+
+    .monthTaskTag {
+        font-size: 0.6rem;
+        padding: 2px 4px;
+    }
+}

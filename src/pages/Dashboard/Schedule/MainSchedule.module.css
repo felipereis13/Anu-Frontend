@@ -1,16 +1,13 @@
-/* Container principal do cronograma */
 .mainScheduleContainer {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    overflow-x: auto;
+    overflow: hidden;
     background-color: #F8F7F5;
 }
 
-/* --- CABEÇALHO ATUALIZADO --- */
 .headerContainer {
     height: 80px;
-    width: 100vw;
     background-color: #A39787;
     flex-shrink: 0;
     position: sticky;
@@ -20,6 +17,7 @@
     align-items: center;
     padding: 0;
     border-bottom: 2px solid white;
+    overflow: hidden;
 }
 
 .monthLabel {
@@ -35,22 +33,22 @@
     border-right: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Container para os dias da semana */
 .daysContainer {
     display: flex;
     flex-grow: 1;
     height: 100%;
+    overflow: hidden;
 }
 
 .dayColumn {
     flex: 1;
-    min-width: 120px;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-right: 2px solid rgba(255, 255, 255, 0.3);
+    min-width: 0;
 }
 
 .dayColumn:last-child {
@@ -71,51 +69,83 @@
     font-size: 1.3rem;
 }
 
-/* --- GRADE DE HORÁRIOS SINCRONIZADA --- */
+/* --- RESPONSIVIDADE TABLET --- */
+@media (max-width: 768px) {
+    .headerContainer {
+        height: 70px;
+    }
+
+    .monthLabel {
+        font-size: 1.2rem;
+        width: 70px;
+    }
+
+    .dayText {
+        font-size: 0.7rem;
+        margin-bottom: 1px;
+    }
+
+    .dateText {
+        font-size: 1.1rem;
+    }
+}
+
+/* --- RESPONSIVIDADE MOBILE --- */
+@media (max-width: 480px) {
+    .headerContainer {
+        height: 60px;
+    }
+
+    .monthLabel {
+        font-size: 1rem;
+        width: 60px;
+        font-weight: 700;
+    }
+
+    .dayText {
+        font-size: 0.6rem;
+        margin-bottom: 0;
+    }
+
+    .dateText {
+        font-size: 1rem;
+    }
+}
+
+/* --- GRADE DE HORÁRIOS --- */
 .gridContainer {
     flex-grow: 1;
     position: relative;
     display: grid;
-    grid-template-rows: repeat(5, 100px); /* Altura aumentada para melhor alinhamento */
-    grid-template-columns: repeat(6, 1fr);
-    width: 100%;
-    min-width: max-content;
+    grid-auto-rows: 100px;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #F8F7F5;
+    overflow: auto;
 }
 
-/* Linhas Horizontais da Grade - Mais limpas */
-.employeeRowDivider {
-    grid-column: 1 / -1;
-    border-color: white !important;
-    border-width: 1px !important; /* Linha mais fina */
-    margin: 0 !important;
-    align-self: end;
+@media (max-width: 768px) {
+    .gridContainer {
+        grid-auto-rows: 80px;
+    }
 }
 
-/* Linhas Verticais da Grade */
-.dayColumnDivider {
-    grid-row: 1 / -1;
-    height: 100%;
-    border-color: white !important;
-    border-width: 1px !important; /* Linha mais fina */
-    margin: 0 !important;
+@media (max-width: 480px) {
+    .gridContainer {
+        grid-auto-rows: 70px;
+    }
 }
 
-.dayColumnDivider:last-child {
-    display: none; /* Remove a última linha vertical */
-}
-
-/* Células vazias para os horários */
-.scheduleCell {
+/* Células do grid */
+.gridCell {
     background-color: #F8F7F5;
     border-right: 1px solid white;
     border-bottom: 1px solid white;
+    min-width: 0;
 }
 
-.scheduleCell:nth-child(6n) {
-    border-right: none; /* Remove borda direita da última coluna */
+.gridCell:nth-child(7n) {
+    border-right: none;
 }
-
-/* MainSchedule.module.css - Adicionar estas classes */
 
 /* Container da tarefa */
 .taskContainer {
@@ -173,15 +203,102 @@
     opacity: 0.9;
 }
 
-/* Ajustes no grid container para posicionamento absoluto */
-.gridContainer {
-    flex-grow: 1;
-    position: relative;
-    display: grid;
-    grid-template-rows: repeat(5, 100px);
-    grid-template-columns: repeat(6, 1fr);
+@media (max-width: 768px) {
+    .taskContainer {
+        height: 50px;
+        padding: 0 8px;
+        margin: 3px 1px;
+    }
+
+    .taskTitle {
+        font-size: 0.65rem;
+    }
+
+    .taskCompany {
+        font-size: 0.55rem;
+    }
+
+    .taskCategory {
+        font-size: 0.5rem;
+        top: 2px;
+        right: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .taskContainer {
+        height: 45px;
+        padding: 0 6px;
+        margin: 2px 1px;
+    }
+
+    .taskTitle {
+        font-size: 0.55rem;
+    }
+
+    .taskCompany {
+        display: none;
+    }
+
+    .taskCategory {
+        font-size: 0.45rem;
+        top: 1px;
+        right: 2px;
+    }
+}
+.taskContainer {
+    position: absolute;
+    height: 60px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    margin: 4px 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.taskContainer:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Conteúdo da tarefa */
+.taskContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     width: 100%;
-    min-width: max-content;
+}
+
+.taskTitle {
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.taskCompany {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    font-size: 0.65rem;
+    line-height: 1.2;
+}
+
+.taskCategory {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    color: white;
+    font-weight: 700;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    opacity: 0.9;
 }
 
 /* Células do grid para referência de posicionamento */
@@ -191,6 +308,6 @@
     border-bottom: 1px solid white;
 }
 
-.gridCell:nth-child(6n) {
+.gridCell:nth-child(7n) {
     border-right: none;
 }

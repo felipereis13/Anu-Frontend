@@ -42,16 +42,15 @@ export const employeesData: Employee[] = [
     },
 ];
 
-// src/data/tasks.ts
 export interface Task {
     id: string;
     employeeName: string;
     title: string;
     category: 'front' | 'back' | 'design' | 'brand' | 'web';
     company: string;
-    startDate: number; // Dia do mês (6, 7, 8, etc.)
-    endDate: number;   // Dia do mês
-    color: string;     // Cor da categoria
+    startDate: string; 
+    endDate: string;   
+    color: string;    
 }
 
 export const tasksData: Task[] = [
@@ -61,9 +60,9 @@ export const tasksData: Task[] = [
         title: 'Homepage Redesign',
         category: 'front',
         company: 'Google',
-        startDate: 6,
-        endDate: 8,
-        color: '#4F46E5' // Azul
+        startDate: '2025-12-02',
+        endDate: '2025-12-04',
+        color: '#4F46E5'
     },
     {
         id: '2',
@@ -71,9 +70,9 @@ export const tasksData: Task[] = [
         title: 'API Integration',
         category: 'back',
         company: 'Microsoft',
-        startDate: 9,
-        endDate: 11,
-        color: '#DC2626' // Vermelho
+        startDate: '2025-12-05',
+        endDate: '2025-12-06',
+        color: '#DC2626'
     },
     {
         id: '3',
@@ -81,9 +80,9 @@ export const tasksData: Task[] = [
         title: 'Brand Identity',
         category: 'brand',
         company: 'Nike',
-        startDate: 6,
-        endDate: 10,
-        color: '#059669' // Verde
+        startDate: '2025-11-01',
+        endDate: '2025-11-05',
+        color: '#059669' 
     },
     {
         id: '4',
@@ -91,9 +90,9 @@ export const tasksData: Task[] = [
         title: 'System Architecture',
         category: 'back',
         company: 'Amazon',
-        startDate: 7,
-        endDate: 9,
-        color: '#DC2626' // Vermelho
+        startDate: '2025-12-02',
+        endDate: '2025-12-04',
+        color: '#DC2626'
     },
     {
         id: '5',
@@ -101,9 +100,9 @@ export const tasksData: Task[] = [
         title: 'UI/UX Design',
         category: 'design',
         company: 'Apple',
-        startDate: 8,
-        endDate: 11,
-        color: '#7C3AED' // Roxo
+        startDate: '2025-12-08',
+        endDate: '2025-12-15',
+        color: '#7C3AED'
     },
     {
         id: '6',
@@ -111,22 +110,20 @@ export const tasksData: Task[] = [
         title: 'E-commerce Platform',
         category: 'web',
         company: 'Shopify',
-        startDate: 6,
-        endDate: 11,
-        color: '#EA580C' // Laranja
+        startDate: '2025-11-01',
+        endDate: '2025-12-25',
+        color: '#EA580C' 
     }
 ];
 
-// Mapeamento de cores para categorias
 export const categoryColors = {
-    front: '#4F46E5', // Azul
-    back: '#DC2626',  // Vermelho
-    design: '#7C3AED', // Roxo
-    brand: '#059669', // Verde
-    web: '#EA580C'    // Laranja
+    front: '#4F46E5', 
+    back: '#DC2626',  
+    design: '#7C3AED', 
+    brand: '#059669', 
+    web: '#EA580C'    
 };
 
-// Mapeamento de labels para categorias
 export const categoryLabels = {
     front: 'FRONT',
     back: 'BACK',
