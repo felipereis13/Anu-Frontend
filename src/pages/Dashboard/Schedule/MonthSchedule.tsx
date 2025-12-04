@@ -103,15 +103,17 @@ function MonthGrid({ date, tasksToDisplay, selectedEmployees, employees }: { dat
                                     const empIndex = employeesToShow.findIndex(emp => emp.name === task.employeeName);
                                     if (empIndex === -1) return null;
                                     
+                                    const taskTitle = task.title || task.company;
+                                    
                                     return (
                                         <Box
                                             key={task.id}
                                             className={classes.monthTaskTag}
                                             style={{ backgroundColor: task.color }}
-                                            title={`${task.title} - ${task.employeeName}`}
+                                            title={`${taskTitle} - ${task.employeeName}`}
                                         >
                                             <Text className={classes.monthTaskText}>
-                                                {task.title.length > 12 ? task.title.substring(0, 12) + '...' : task.title}
+                                                {taskTitle.length > 12 ? taskTitle.substring(0, 12) + '...' : taskTitle}
                                             </Text>
                                         </Box>
                                     );

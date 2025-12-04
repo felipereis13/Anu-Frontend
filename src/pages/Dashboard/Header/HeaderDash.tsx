@@ -19,7 +19,6 @@ interface HeaderDashProps {
     onToday: () => void;
     viewType: ViewType;
     onViewChange: (view: ViewType) => void;
-    categoryOptions?: Option[];
     companyOptions?: Option[];
     selectedCompanies?: Set<string>;
     onCompaniesChange?: (values: string[]) => void;
@@ -27,8 +26,8 @@ interface HeaderDashProps {
 }
 
 export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewChange,
-    categoryOptions = [], companyOptions = [], selectedCategories, selectedCompanies,
-    onCategoriesChange, onCompaniesChange, onClearTaskFilters
+    companyOptions = [], selectedCompanies,
+    onCompaniesChange, onClearTaskFilters
 }: HeaderDashProps) {
     const [filtersOpened, { open: openFilters, close: closeFilters }] = useDisclosure(false);
     const iconColor = '#A39787';
