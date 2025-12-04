@@ -931,11 +931,11 @@
   dependencies:
     undici-types "~7.16.0"
 
-"@types/react-dom@^19.1.9":
+"@types/react-dom@^19.2.3":
   version "19.2.3"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-19.2.3.tgz#c1e305d15a52a3e508d54dca770d202cb63abf2c"
 
-"@types/react@>=16.9.11", "@types/react@^19.1.16":
+"@types/react@>=16.9.11", "@types/react@^19.2.7":
   version "19.2.7"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-19.2.7.tgz#84e62c0f23e8e4e5ac2cadcea1ffeacccae7f62f"
   dependencies:

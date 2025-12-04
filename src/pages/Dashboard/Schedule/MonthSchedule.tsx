@@ -3,9 +3,9 @@
 import { Text, Box } from '@mantine/core';
 import { useMemo } from 'react';
 import classes from './MonthSchedule.module.css';
-import { tasksData } from '../../../data/employees';
-import type { Task } from '../../../data/employees';
+import type { Allocation as Task } from '../../../data/employees';
 import { useEmployees } from '../../../context/EmployeeContext';
+import { useAllocations } from '../../../context/useAllocations';
 
 // Helper function to parse date string and get date components
 function parseDateString(dateStr: string) {
@@ -133,6 +133,7 @@ function MonthGrid({ date, tasksToDisplay, selectedEmployees, employees }: { dat
 // Componente principal
 export function MonthSchedule({ currentDate, selectedEmployees, selectedCategories, selectedCompanies }: { currentDate: Date, selectedEmployees: Set<string>, selectedCategories?: Set<string>, selectedCompanies?: Set<string> }) {
     const { employees } = useEmployees();
+    const { allocations } = useAllocations();
     // Filtrar tarefas do mês
     const tasksToDisplay = useMemo(() => {
         const month = currentDate.getMonth();
@@ -143,7 +144,7 @@ export function MonthSchedule({ currentDate, selectedEmployees, selectedCategori
         monthStart.setHours(0, 0, 0, 0);
         monthEnd.setHours(23, 59, 59, 999);
 
-        return tasksData.filter(task => {
+        return allocations.filter((task: Task) => {
             const taskStart = parseDateString(task.startDate);
             const taskEnd = parseDateString(task.endDate);
             
@@ -154,12 +155,11 @@ export function MonthSchedule({ currentDate, selectedEmployees, selectedCategori
             const intersects = taskStart <= monthEnd && taskEnd >= monthStart;
             if (!intersects) return false;
 
-            if (selectedCategories && selectedCategories.size > 0 && !selectedCategories.has(task.category)) return false;
             if (selectedCompanies && selectedCompanies.size > 0 && !selectedCompanies.has(task.company)) return false;
 
             return true;
         });
-    }, [currentDate, selectedCategories, selectedCompanies]);
+    }, [currentDate, selectedCategories, selectedCompanies, allocations]);
 
     return (
         <div className={classes.monthScheduleContainer}>

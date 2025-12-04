@@ -21,9 +21,7 @@ interface HeaderDashProps {
     onViewChange: (view: ViewType) => void;
     categoryOptions?: Option[];
     companyOptions?: Option[];
-    selectedCategories?: Set<string>;
     selectedCompanies?: Set<string>;
-    onCategoriesChange?: (values: string[]) => void;
     onCompaniesChange?: (values: string[]) => void;
     onClearTaskFilters?: () => void;
 }
@@ -256,14 +254,6 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                     classNames={{ title: classes.drawerTitle }}
                 >
                     <Stack gap="sm">
-                        <Text fw={700}>Categorias</Text>
-                        <MultiSelect
-                            data={categoryOptions}
-                            placeholder="Selecione categorias"
-                            value={selectedCategories ? Array.from(selectedCategories) : []}
-                            onChange={(vals) => onCategoriesChange && onCategoriesChange(vals)}
-                        />
-
                         <Text fw={700}>Empresas</Text>
                         <MultiSelect
                             data={companyOptions}

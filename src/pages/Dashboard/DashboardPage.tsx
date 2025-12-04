@@ -6,7 +6,6 @@ import { SideBar } from "./SideBar/SideBar";
 import { MainSchedule } from "./Schedule/MainSchedule";
 import { MonthSchedule } from "./Schedule/MonthSchedule";
 import { YearSchedule } from "./Schedule/YearSchedule";
-import { categoryLabels } from '../../data/employees';
 import { useEmployees } from '../../context/EmployeeContext';
 
 export type ViewType = 'week' | 'month' | 'year';
@@ -26,12 +25,10 @@ export function DashboardPage() {
 
     const [currentDate, setCurrentDate] = useState(new Date());
 
-    // Task filters (categories and companies)
-    const [selectedCategories, setSelectedCategories] = useState<Set<string>>(new Set());
+    // Task filters (companies only)
     const [selectedCompanies, setSelectedCompanies] = useState<Set<string>>(new Set());
 
     // Options for header filter controls
-    const categoryOptions = Object.entries(categoryLabels).map(([value, label]) => ({ value, label }));
     const companyOptions = Array.from(new Set(employees.map(e => e.company))).map(c => ({ value: c, label: c }));
 
     const handlePrevWeek = useCallback(() => {
@@ -84,33 +81,26 @@ export function DashboardPage() {
         setSelectedEmployees(new Set());
     }, []);
 
-    const handleCategoriesChange = useCallback((values: string[]) => {
-        setSelectedCategories(new Set(values));
-    }, []);
-
     const handleCompaniesChange = useCallback((values: string[]) => {
         setSelectedCompanies(new Set(values));
     }, []);
 
     const clearTaskFilters = useCallback(() => {
-        setSelectedCategories(new Set());
         setSelectedCompanies(new Set());
     }, []);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
 
-            <HeaderDash 
+                <HeaderDash 
                 onPrevWeek={handlePrevWeek} 
                 onNextWeek={handleNextWeek} 
                 onToday={handleToday}
                 viewType={viewType}
                 onViewChange={setViewType}
-                categoryOptions={categoryOptions}
                 companyOptions={companyOptions}
-                selectedCategories={selectedCategories}
                 selectedCompanies={selectedCompanies}
-                onCategoriesChange={handleCategoriesChange}
+                
                 onCompaniesChange={handleCompaniesChange}
                 onClearTaskFilters={clearTaskFilters}
             />
@@ -131,7 +121,6 @@ export function DashboardPage() {
                         <MainSchedule 
                             currentWeekStart={currentWeekStart}
                             selectedEmployees={selectedEmployees}
-                            selectedCategories={selectedCategories}
                             selectedCompanies={selectedCompanies}
                         />
                     )}
@@ -140,7 +129,6 @@ export function DashboardPage() {
                         <MonthSchedule 
                             currentDate={currentDate}
                             selectedEmployees={selectedEmployees}
-                            selectedCategories={selectedCategories}
                             selectedCompanies={selectedCompanies}
                         />
                     )}
@@ -149,7 +137,6 @@ export function DashboardPage() {
                         <YearSchedule 
                             currentDate={currentDate}
                             selectedEmployees={selectedEmployees}
-                            selectedCategories={selectedCategories}
                             selectedCompanies={selectedCompanies}
                         />
                     )}

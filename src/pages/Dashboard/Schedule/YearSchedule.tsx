@@ -2,9 +2,9 @@
 import { Text } from '@mantine/core';
 import { useMemo } from 'react';
 import classes from './YearSchedule.module.css';
-import { tasksData } from '../../../data/employees';
-import type { Task } from '../../../data/employees';
+import type { Allocation as Task } from '../../../data/employees';
 import { useEmployees } from '../../../context/EmployeeContext';
+import { useAllocations } from '../../../context/useAllocations';
 
 // Helper function to parse date string and get date components
 function parseDateString(dateStr: string) {
@@ -125,6 +125,7 @@ function YearGrid({ year, tasksToDisplay, selectedEmployees, employees }: { year
 // Componente principal
 export function YearSchedule({ currentDate, selectedEmployees, selectedCategories, selectedCompanies }: { currentDate: Date, selectedEmployees: Set<string>, selectedCategories?: Set<string>, selectedCompanies?: Set<string> }) {
     const { employees } = useEmployees();
+    const { allocations } = useAllocations();
     const year = currentDate.getFullYear();
 
     const tasksToDisplay = useMemo(() => {
@@ -134,7 +135,7 @@ export function YearSchedule({ currentDate, selectedEmployees, selectedCategorie
         yearStart.setHours(0, 0, 0, 0);
         yearEnd.setHours(23, 59, 59, 999);
         
-        return tasksData.filter(task => {
+        return allocations.filter((task: Task) => {
             const taskStart = parseDateString(task.startDate);
             const taskEnd = parseDateString(task.endDate);
             
@@ -145,11 +146,10 @@ export function YearSchedule({ currentDate, selectedEmployees, selectedCategorie
             const intersects = taskStart <= yearEnd && taskEnd >= yearStart;
             if (!intersects) return false;
             
-            if (selectedCategories && selectedCategories.size > 0 && !selectedCategories.has(task.category)) return false;
             if (selectedCompanies && selectedCompanies.size > 0 && !selectedCompanies.has(task.company)) return false;
             return true;
         });
-    }, [year, selectedCategories, selectedCompanies]);
+    }, [year, selectedCategories, selectedCompanies, allocations]);
 
     return (
         <div className={classes.yearScheduleContainer}>

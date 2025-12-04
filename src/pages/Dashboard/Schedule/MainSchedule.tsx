@@ -3,9 +3,9 @@
 import { Group, Text, Box } from '@mantine/core';
 import { useMemo } from 'react';
 import classes from './MainSchedule.module.css';
-import { tasksData, categoryLabels } from '../../../data/employees';
-import type { Task } from '../../../data/employees';
+import type { Allocation as Task } from '../../../data/employees';
 import { useEmployees } from '../../../context/EmployeeContext';
+import { useAllocations } from '../../../context/useAllocations';
 
 // Helper function to convert date to YYYY-MM-DD string
 function dateToString(date: Date): string {
@@ -99,13 +99,10 @@ function TaskItem({
             }}
         >
             <div className={classes.taskContent}>
-                <Text className={classes.taskTitle}>{task.title}</Text>
+                <Text className={classes.taskTitle}>{task.title ?? task.company}</Text>
                 <Text className={classes.taskCompany}>{task.company}</Text>
             </div>
-
-            <Text className={classes.taskCategory}>
-                {categoryLabels[task.category]}
-            </Text>
+            
         </Box>
     );
 }
@@ -179,15 +176,14 @@ function ScheduleGrid({
 export function MainSchedule({
     currentWeekStart,
     selectedEmployees,
-    selectedCategories,
     selectedCompanies
 }: {
     currentWeekStart: Date;
     selectedEmployees: Set<string>;
-    selectedCategories?: Set<string>;
     selectedCompanies?: Set<string>;
 }) {
     const { employees } = useEmployees();
+    const { allocations } = useAllocations();
     const weekDays = useMemo(() => getWeekDays(currentWeekStart), [currentWeekStart]);
 
     const tasksToDisplay = useMemo(() => {
@@ -196,16 +192,10 @@ export function MainSchedule({
 
         if (!weekStartStr || !weekEndStr) return [];
 
-        return tasksData.filter(task => {
+        return allocations.filter((task: Task) => {
             // Check if task intersects with week using string comparison
             const taskInWeek = task.startDate <= weekEndStr && task.endDate >= weekStartStr;
             if (!taskInWeek) return false;
-
-            // Category filter
-            if (selectedCategories && selectedCategories.size > 0 && !selectedCategories.has(task.category)) {
-                return false;
-            }
-
             // Company filter
             if (selectedCompanies && selectedCompanies.size > 0 && !selectedCompanies.has(task.company)) {
                 return false;
@@ -213,7 +203,7 @@ export function MainSchedule({
 
             return true;
         });
-    }, [weekDays, selectedCategories, selectedCompanies]);
+    }, [weekDays, selectedCompanies, allocations]);
 
     return (
         <div className={classes.mainScheduleContainer}>

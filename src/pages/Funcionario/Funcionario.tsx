@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {Container,Text,ScrollArea,Table,TextInput,UnstyledButton,Group,Center,Pagination,MultiSelect,Button,Modal,Paper, ThemeIcon, Badge, } from '@mantine/core';
 import {IconChevronDown,IconChevronUp,IconSearch,IconSelector,IconX,IconDownload,IconPlus,IconUserCircle, IconBuildingCommunity, IconPhone, IconUsers, IconTag, IconBriefcase, } from '@tabler/icons-react';
 import classes from './Funcionario.module.css';
 import { Nav } from '../../Components/Nav/Nav';
+import EmployeeModal from '../Dashboard/modal/EmployeeModal';
+import EmployeeAllocationDrawer from '../Dashboard/modal/EmployeeAllocationDrawer';
+import { useEmployees } from '../../context/EmployeeContext';
+import { useAllocations } from '../../context/useAllocations';
+import { useDisclosure } from '@mantine/hooks';
+import dayjs from 'dayjs';
 import { HeaderSearch } from '../../Components/search/Search';
 
 interface RowData {
@@ -213,6 +219,29 @@ export function Funcionario() {
 
   const [selectedUser, setSelectedUser] = useState<RowData | null>(null);
   const [modalOpened, setModalOpened] = useState(false);
+  const [openNewModal, setOpenNewModal] = useState(false);
+  const [allocationDrawerOpened, { open: openAllocationDrawer, close: closeAllocationDrawer }] = useDisclosure(false);
+
+  const { employees, addEmployee } = useEmployees();
+  const { addAllocation } = useAllocations();
+  const syncedRef = useRef(false);
+
+  // Sync local funcionario `data` entries into global EmployeeContext once
+  useEffect(() => {
+    if (syncedRef.current) return;
+    data.forEach((row) => {
+      const exists = employees.some((e) => e.name === row.name);
+      if (!exists) {
+        addEmployee({
+          name: row.name,
+          role: row.funcao,
+          company: row.company,
+          companyColor: '#EBE7E1',
+        });
+      }
+    });
+    syncedRef.current = true;
+  }, [employees, addEmployee]);
 
   const itemsPerPage = 10;
 
@@ -289,7 +318,7 @@ export function Funcionario() {
   };
 
   const handleAddEmployee = () => {
-    alert('Ainda vai rolar, calma!');
+    setOpenNewModal(true);
   };
 
   const startIndex = (activePage - 1) * itemsPerPage;
@@ -683,9 +712,62 @@ export function Funcionario() {
                 </Badge>
               ))}
             </Group>
+
+            {/* Botão de alocação */}
+            <Group justify="flex-end" mt="lg">
+              <Button color="#4F46E5" onClick={openAllocationDrawer}>
+                Alocar Empresa
+              </Button>
+            </Group>
           </Paper>
         )}
       </Modal>
+
+      {/* Modal compartilhado para criar novo funcionário (reusa o modal do dashboard) */}
+      <EmployeeModal
+        opened={openNewModal}
+        onClose={() => setOpenNewModal(false)}
+        onSubmit={(values) => {
+          const newEmployee = {
+            name: values.nome,
+            role: values.funcao,
+            company: values.departamento || 'N/A',
+            companyColor: '#EBE7E1',
+          };
+          addEmployee(newEmployee);
+          setOpenNewModal(false);
+        }}
+      />
+
+      {/* Drawer para alocar empresa a um funcionário */}
+      {selectedUser && (
+        <EmployeeAllocationDrawer
+          opened={allocationDrawerOpened}
+          onClose={closeAllocationDrawer}
+          empresasDisponiveis={[]}
+          onSubmit={(alocacoes) => {
+            // Create an allocation for each company selected
+            alocacoes.alocacoes.forEach((aloc) => {
+              const id = `${selectedUser.name}-${aloc.empresa}-${Date.now()}`;
+              const startDateStr = aloc.dataInicio ? dayjs(aloc.dataInicio).format('YYYY-MM-DD') : '';
+              const endDateStr = aloc.dataFim ? dayjs(aloc.dataFim).format('YYYY-MM-DD') : '';
+              
+              if (startDateStr && endDateStr && aloc.empresa) {
+                addAllocation({
+                  id,
+                  employeeName: selectedUser.name,
+                  company: aloc.empresa,
+                  title: `Alocado na ${aloc.empresa}`,
+                  startDate: startDateStr,
+                  endDate: endDateStr,
+                  color: '#4F46E5',
+                });
+              }
+            });
+            closeAllocationDrawer();
+          }}
+        />
+      )}
     </div>
   );
 }

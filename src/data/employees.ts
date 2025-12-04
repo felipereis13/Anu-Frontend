@@ -42,24 +42,23 @@ export const employeesData: Employee[] = [
     },
 ];
 
-export interface Task {
+export interface Allocation {
     id: string;
     employeeName: string;
-    title: string;
-    category: 'front' | 'back' | 'design' | 'brand' | 'web';
     company: string;
+    title?: string; // optional descriptive title for the allocation
     startDate: string; 
     endDate: string;   
     color: string;    
 }
 
-export const tasksData: Task[] = [
+// Allocations represent an employee being assigned to a company for a period.
+export const allocationsData: Allocation[] = [
     {
         id: '1',
         employeeName: 'Rayo Mello',
-        title: 'Homepage Redesign',
-        category: 'front',
         company: 'Google',
+        title: 'Alocado na Google',
         startDate: '2025-12-02',
         endDate: '2025-12-04',
         color: '#4F46E5'
@@ -67,9 +66,8 @@ export const tasksData: Task[] = [
     {
         id: '2',
         employeeName: 'Rayo Mello',
-        title: 'API Integration',
-        category: 'back',
         company: 'Microsoft',
+        title: 'Alocado na Microsoft',
         startDate: '2025-12-05',
         endDate: '2025-12-06',
         color: '#DC2626'
@@ -77,9 +75,8 @@ export const tasksData: Task[] = [
     {
         id: '3',
         employeeName: 'Ruthe Maria',
-        title: 'Brand Identity',
-        category: 'brand',
         company: 'Nike',
+        title: 'Alocado na Nike',
         startDate: '2025-11-01',
         endDate: '2025-11-05',
         color: '#059669' 
@@ -87,9 +84,8 @@ export const tasksData: Task[] = [
     {
         id: '4',
         employeeName: 'Bruno Vieira',
-        title: 'System Architecture',
-        category: 'back',
         company: 'Amazon',
+        title: 'Alocado na Amazon',
         startDate: '2025-12-02',
         endDate: '2025-12-04',
         color: '#DC2626'
@@ -97,9 +93,8 @@ export const tasksData: Task[] = [
     {
         id: '5',
         employeeName: 'Beatriz Fordes',
-        title: 'UI/UX Design',
-        category: 'design',
         company: 'Apple',
+        title: 'Alocado na Apple',
         startDate: '2025-12-08',
         endDate: '2025-12-15',
         color: '#7C3AED'
@@ -107,27 +102,10 @@ export const tasksData: Task[] = [
     {
         id: '6',
         employeeName: 'Daniel José',
-        title: 'E-commerce Platform',
-        category: 'web',
         company: 'Shopify',
+        title: 'Alocado na Shopify',
         startDate: '2025-11-01',
         endDate: '2025-12-25',
         color: '#EA580C' 
     }
 ];
-
-export const categoryColors = {
-    front: '#4F46E5', 
-    back: '#DC2626',  
-    design: '#7C3AED', 
-    brand: '#059669', 
-    web: '#EA580C'    
-};
-
-export const categoryLabels = {
-    front: 'FRONT',
-    back: 'BACK',
-    design: 'DESIGN',
-    brand: 'BRAND',
-    web: 'WEB'
-};

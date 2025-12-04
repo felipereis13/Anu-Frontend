@@ -16,15 +16,17 @@ dayjs.locale("pt-br")
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from "./pages/Login/Login.tsx"
 import Error from "./pages/Erro404/NotFoundPage.tsx"
-import TestPage from "./Components/employeeModal/testPage.tsx"
 import { DashboardPage } from "./pages/Dashboard/DashboardPage.tsx"
 import { EmployeeProvider } from "./context/EmployeeContext.tsx"
+import { AuthProvider, RequireAuth } from './context/AuthContext.tsx'
+import { AllocationProvider } from "./context/AllocationContext.tsx"
+import { Funcionario } from "./pages/Funcionario/Funcionario.tsx"
 
 
 const router = createBrowserRouter([
   {
     path: "/app",
-    element: <App />,
+    element: <RequireAuth><App /></RequireAuth>,
   },
   {
     path: "/",
@@ -35,24 +37,29 @@ const router = createBrowserRouter([
     element: <Error />,
   },
   {
-    path: "/testpage",
-    element: <TestPage />,
+    path:"/cronograma",
+    element: <RequireAuth><DashboardPage /></RequireAuth>
   },
   {
-    path:"/cronograma",
-    element: <DashboardPage />
+    path: "/funcionarios",
+    element: <RequireAuth><Funcionario /></RequireAuth>
   }
   
 ])
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <EmployeeProvider>
-      <MantineProvider>
-        <DatesProvider settings={{ locale: "pt-br", firstDayOfWeek: 0 }}>
-          <RouterProvider router={router} />
-        </DatesProvider>
-      </MantineProvider>
-    </EmployeeProvider>
+    <AuthProvider>
+      <EmployeeProvider>
+        <AllocationProvider>
+          <MantineProvider>
+            <DatesProvider settings={{ locale: "pt-br", firstDayOfWeek: 0 }}>
+              {/* Protect routes that require auth by wrapping elements in the router with <RequireAuth> */}
+              <RouterProvider router={router} />
+            </DatesProvider>
+          </MantineProvider>
+        </AllocationProvider>
+      </EmployeeProvider>
+    </AuthProvider>
   </StrictMode>
 )

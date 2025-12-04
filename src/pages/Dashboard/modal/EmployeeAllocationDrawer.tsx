@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Drawer,
   Button,
@@ -53,7 +54,6 @@ export default function EmployeeAllocationDrawer({
 }: EmployeeAllocationDrawerProps) {
   const [alocacoes, setAlocacoes] = useState<Alocacao[]>([]);
 
-  // Férias e licenças médicas como arrays
   const [ferias, setFerias] = useState<Periodo[]>([
     { dataInicio: null, dataFim: null },
   ]);
@@ -62,7 +62,6 @@ export default function EmployeeAllocationDrawer({
     { dataInicio: null, dataFim: null },
   ]);
 
-  // ----- Alocações -----
   const adicionarAlocacao = () => {
     setAlocacoes((prev) => [
       ...prev,
@@ -89,7 +88,6 @@ export default function EmployeeAllocationDrawer({
     setAlocacoes(novaLista);
   };
 
-  // ----- Férias -----
   const adicionarFerias = () => {
     setFerias((prev) => [...prev, { dataInicio: null, dataFim: null }]);
   };
