@@ -1,0 +1,248 @@
+.sidebarContainer {
+    width: 300px; 
+    background-color: white;
+    box-shadow: 1px 0 5px rgba(0, 0, 0, 0.05);
+    height: 100vh;
+    margin-left: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .sidebarContainer {
+        width: 250px;
+        margin-left: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebarContainer {
+        display: none;
+    }
+
+    .sidebarContainer.collapsed {
+        display: flex;
+    }
+}
+
+.sidebarContainer.collapsed {
+    width: 80px;
+    margin-left: 80px;
+    transition: width 160ms ease, margin-left 160ms ease;
+}
+
+.sidebarContainer.collapsed .filterInfo {
+    display: none;
+}
+
+.sidebarContainer.collapsed .listItemContainer {
+    padding-left: 8px;
+}
+
+.sidebarContainer.collapsed .listItemContainer .stack,
+.sidebarContainer.collapsed .listItemContainer .nameText,
+.sidebarContainer.collapsed .listItemContainer .roleText,
+.sidebarContainer.collapsed .companyTagWrapper,
+.sidebarContainer.collapsed .checkbox {
+    display: none;
+}
+
+.sidebarContainer.collapsed .avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.listHeader {
+    position: relative;
+    z-index: 60;
+    background: white;
+}
+
+.sidebarContainer.collapsed .listHeader {
+    height: 80px;
+    padding: 6px 8px;
+    align-items: center;
+    display: flex;
+}
+
+.headerLeft {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+
+.sidebarContainer.collapsed .headerLeft {
+    display: none;
+}
+
+/* make list items smaller when collapsed so top icons don't visually overlap */
+.sidebarContainer.collapsed .listItemContainer {
+    height: 100px;
+}
+
+.sidebarContainer.collapsed .employeeList {
+    padding-top: 4px;
+}
+
+.listHeader {
+    height: 80px;
+    align-items: center;
+    border-bottom: 1px solid var(--mantine-color-gray-3);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .listHeader {
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .listHeader {
+        height: 60px;
+    }
+}
+
+.filterInfo {
+    padding: 12px var(--mantine-spacing-md);
+    background-color: #FFF8F0;
+    border-bottom: 1px solid #EBE7E1;
+    flex-shrink: 0;
+}
+
+.employeeList {
+    padding: 0;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.listItemContainer {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--mantine-spacing-md);
+    cursor: pointer;
+    transition: background-color 150ms ease;
+    border-bottom: 1px solid var(--mantine-color-gray-2);
+}
+
+@media (max-width: 768px) {
+    .listItemContainer {
+        height: 100px;
+        padding: 0 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .listItemContainer {
+        height: 80px;
+        padding: 0 0.5rem;
+    }
+}
+
+.listItemContainer:hover {
+    background-color: var(--mantine-color-gray-0);
+}
+
+.listItemContainer.selected {
+    background-color: #EBE7E1;
+    border-left: 3px solid #A39787;
+    padding-left: calc(var(--mantine-spacing-md) - 3px);
+}
+
+.listItemContainer:last-child {
+    border-bottom: none;
+}
+
+.listItem {
+    margin: 0;
+    padding: 0;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+}
+
+.nameText {
+    color: #2D2A24;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.roleText {
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 768px) {
+    .nameText {
+        font-size: 0.9rem;
+        margin-bottom: 1px;
+    }
+
+    .roleText {
+        font-size: 0.75rem;
+        margin-bottom: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nameText {
+        font-size: 0.8rem;
+    }
+
+    .roleText {
+        font-size: 0.7rem;
+    }
+}
+
+.companyTagWrapper {
+    margin-top: 2px;
+}
+
+.companyTag {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #4c443b;
+    border: 1px solid #DED8D0;
+    background-color: #F5F2EF;
+    line-height: 1.2;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #A39787;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #A39787;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: white;
+    flex-shrink: 0;
+    transition: all 150ms ease;
+}
+
+.checkbox.checkboxChecked {
+    background-color: #A39787;
+    color: white;
+    border-color: #A39787;
+}
+
+.listItemContainer .mantine-Divider-root {
+    display: none;
+}

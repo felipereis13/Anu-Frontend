@@ -10,6 +10,27 @@
   object-fit: cover;
 }
 
+@media (max-width: 48em) {
+  .imageLogin {
+    display: none;
+  }
+}
+
+.formContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30vh;
+  margin-top: auto;
+}
+
+.logoLogin {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+  width: 250px;
+}
+
 .form {
   align-self: center;
   border-right: 1px solid
@@ -27,19 +48,14 @@
     flex-direction: column; 
   }
 
-  .form {
-    order: 1;          
-    width: 100vw;       
-    height: 100vh;      
+  /* @media (max-width: 48em) {
     max-width: 100%;
-    border-right: none; 
-  }
+  } */
+}
 
-  .imageLogin {
-    order: 2;           
-    width: 100vw;
-    height: 30vh;       
-   
+@media (max-width: 48em) {
+  .form {
+    width: 100vw; 
   }
 }
 

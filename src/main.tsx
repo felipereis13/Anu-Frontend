@@ -1,13 +1,24 @@
 import { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
 import App from "./App.tsx"
-import { MantineProvider } from "@mantine/core"
 
-//rotas
+import { MantineProvider } from "@mantine/core"
+import { DatesProvider } from "@mantine/dates"
+import '@mantine/core/styles.css'; 
+import '@mantine/dates/styles.css';
+
+// Dayjs Configuration
+import dayjs from "dayjs"
+import 'dayjs/locale/pt-br'
+dayjs.locale("pt-br")
+
+// Router Imports
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from "./pages/Login/Login.tsx"
-import  Error  from "./pages/Erro404/NotFoundPage.tsx"
-import { Funcionario } from "./pages/Funcionario/Funcionario.tsx"
+import Error from "./pages/Erro404/NotFoundPage.tsx"
+import TestPage from "./Components/employeeModal/testPage.tsx"
+import { DashboardPage } from "./pages/Dashboard/DashboardPage.tsx"
+import { EmployeeProvider } from "./context/EmployeeContext.tsx"
 
 
 const router = createBrowserRouter([
@@ -15,7 +26,6 @@ const router = createBrowserRouter([
     path: "/app",
     element: <App />,
   },
-
   {
     path: "/",
     element: <Login />,
@@ -24,18 +34,25 @@ const router = createBrowserRouter([
     path: "/erro",
     element: <Error />,
   },
-     {
-    path: "/Funcionario",
-    element: <Funcionario />,
+  {
+    path: "/testpage",
+    element: <TestPage />,
   },
+  {
+    path:"/cronograma",
+    element: <DashboardPage />
+  }
+  
 ])
-
-// fim de rotas
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <EmployeeProvider>
+      <MantineProvider>
+        <DatesProvider settings={{ locale: "pt-br", firstDayOfWeek: 0 }}>
+          <RouterProvider router={router} />
+        </DatesProvider>
+      </MantineProvider>
+    </EmployeeProvider>
   </StrictMode>
 )
