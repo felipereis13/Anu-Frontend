@@ -28,3 +28,17 @@
   max-width: 1500px;
 }
 
+.filterBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.tableArea {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+

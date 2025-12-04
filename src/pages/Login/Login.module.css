@@ -33,16 +33,20 @@
 
 .form {
   align-self: center;
-
   border-right: 1px solid
     light-dark(var(--mantine-color-), var(--mantine-color-dark-7));
   height: 100vh;
-
   width: 30vw;
   padding: 70px;
   padding-top: 40px;
   border-radius: 0;
   background: linear-gradient(180deg, #a39787 30%, #c3c3cb 100%);
+}
+
+@media (max-width: 48em) {
+  .wrapper {
+    flex-direction: column; 
+  }
 
   /* @media (max-width: 48em) {
     max-width: 100%;
@@ -55,6 +59,21 @@
   }
 }
 
+.formContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 30vh;
+  margin-top: auto;
+}
+
+.logoLogin {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+  width: 250px;
+}
+
 .title {
   color: light-dark(var(--mantine-color-white), var(--mantine-color-white));
   font-family: Outfit, var(--mantine-font-family);
@@ -65,6 +84,6 @@
   margin-bottom: 10px;
 }
 
-.form.errors.email{
+.form.errors.email {
   background-color: white;
 }
