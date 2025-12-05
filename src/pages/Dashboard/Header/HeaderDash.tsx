@@ -23,9 +23,6 @@ interface HeaderDashProps {
     selectedCompanies?: Set<string>;
     onCompaniesChange?: (values: string[]) => void;
     onClearTaskFilters?: () => void;
-    categoryOptions?: { label: string; value: string }[]
-    selectedCategories?: string[];                         // set the correct type
-    onCategoriesChange?: (categories: string[]) => void;
 }
 
 export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewChange,
