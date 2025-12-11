@@ -47,17 +47,17 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                 <Group gap="xs" visibleFrom="sm" className={classes.controls}>
                     {/* Navegação (Setas) */}
                     <Group gap={4} style={{ marginRight: '1rem' }}>
-                        <ActionIcon 
-                            variant="transparent" 
-                            size="lg" 
+                        <ActionIcon
+                            variant="transparent"
+                            size="lg"
                             aria-label="Anterior"
                             onClick={onPrevWeek}
                         >
                             <SkipPrev color={iconColor} strokeWidth={1.5} width={24} />
                         </ActionIcon>
-                        <ActionIcon 
-                            variant="transparent" 
-                            size="lg" 
+                        <ActionIcon
+                            variant="transparent"
+                            size="lg"
                             aria-label="Próximo"
                             onClick={onNextWeek}
                         >
@@ -98,9 +98,9 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                         </Menu.Target>
 
                         <Menu.Dropdown>
-                            <Menu.Item 
+                            <Menu.Item
                                 onClick={() => onViewChange('week')}
-                                style={{ 
+                                style={{
                                     backgroundColor: viewType === 'week' ? '#EBE7E1' : 'transparent',
                                     color: viewType === 'week' ? '#2D2A24' : '#A39787',
                                     fontWeight: viewType === 'week' ? '600' : '500'
@@ -108,9 +108,9 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                             >
                                 Semana
                             </Menu.Item>
-                            <Menu.Item 
+                            <Menu.Item
                                 onClick={() => onViewChange('month')}
-                                style={{ 
+                                style={{
                                     backgroundColor: viewType === 'month' ? '#EBE7E1' : 'transparent',
                                     color: viewType === 'month' ? '#2D2A24' : '#A39787',
                                     fontWeight: viewType === 'month' ? '600' : '500'
@@ -118,9 +118,9 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                             >
                                 Mês
                             </Menu.Item>
-                            <Menu.Item 
+                            <Menu.Item
                                 onClick={() => onViewChange('year')}
-                                style={{ 
+                                style={{
                                     backgroundColor: viewType === 'year' ? '#EBE7E1' : 'transparent',
                                     color: viewType === 'year' ? '#2D2A24' : '#A39787',
                                     fontWeight: viewType === 'year' ? '600' : '500'
@@ -145,17 +145,17 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                 {/* VISÃO MOBILE: Menu Hamburguer com todos os controles */}
                 <Group gap={8} hiddenFrom="sm" style={{ display: 'flex', alignItems: 'center' }}>
                     {/* Navegação (Setas) */}
-                    <ActionIcon 
-                        variant="transparent" 
-                        size="md" 
+                    <ActionIcon
+                        variant="transparent"
+                        size="md"
                         aria-label="Anterior"
                         onClick={onPrevWeek}
                     >
                         <SkipPrev color={iconColor} strokeWidth={1.5} width={20} />
                     </ActionIcon>
-                    <ActionIcon 
-                        variant="transparent" 
-                        size="md" 
+                    <ActionIcon
+                        variant="transparent"
+                        size="md"
                         aria-label="Próximo"
                         onClick={onNextWeek}
                     >
@@ -198,9 +198,9 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                         </Menu.Target>
 
                         <Menu.Dropdown>
-                            <Menu.Item 
+                            <Menu.Item
                                 onClick={() => onViewChange('week')}
-                                style={{ 
+                                style={{
                                     backgroundColor: viewType === 'week' ? '#EBE7E1' : 'transparent',
                                     color: viewType === 'week' ? '#2D2A24' : '#A39787',
                                     fontWeight: viewType === 'week' ? '600' : '500'
@@ -208,9 +208,9 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                             >
                                 Semana
                             </Menu.Item>
-                            <Menu.Item 
+                            <Menu.Item
                                 onClick={() => onViewChange('month')}
-                                style={{ 
+                                style={{
                                     backgroundColor: viewType === 'month' ? '#EBE7E1' : 'transparent',
                                     color: viewType === 'month' ? '#2D2A24' : '#A39787',
                                     fontWeight: viewType === 'month' ? '600' : '500'
@@ -218,9 +218,9 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                             >
                                 Mês
                             </Menu.Item>
-                            <Menu.Item 
+                            <Menu.Item
                                 onClick={() => onViewChange('year')}
-                                style={{ 
+                                style={{
                                     backgroundColor: viewType === 'year' ? '#EBE7E1' : 'transparent',
                                     color: viewType === 'year' ? '#2D2A24' : '#A39787',
                                     fontWeight: viewType === 'year' ? '600' : '500'
@@ -262,7 +262,7 @@ export function HeaderDash({ onPrevWeek, onNextWeek, onToday, viewType, onViewCh
                         />
 
                         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button variant="default" className={classes.customButton} onClick={() => { onClearTaskFilters && onClearTaskFilters(); closeFilters(); }}>Limpar</Button>
+                            <Button variant="default" className={classes.customButton} onClick={() => { if (onClearTaskFilters) onClearTaskFilters(); closeFilters(); }}>Limpar</Button>
                             <Button style={{ marginLeft: 8 }} onClick={closeFilters}>Aplicar</Button>
                         </div>
                     </Stack>
