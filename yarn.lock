@@ -314,7 +314,7 @@
   dependencies:
     "@floating-ui/utils" "^0.2.10"
 
-"@floating-ui/dom@^1.0.0", "@floating-ui/dom@^1.7.4":
+"@floating-ui/dom@^1.0.0", "@floating-ui/dom@^1.6.2", "@floating-ui/dom@^1.7.4":
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.7.4.tgz#ee667549998745c9c3e3e84683b909c31d6c9a77"
   dependencies:
@@ -668,6 +668,11 @@
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@tiptap/core/-/core-3.11.0.tgz#122a1db7852c9cea48221290210e713bb4efd66e"
 
+"@tiptap/core@^3.6.3":
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/@tiptap/core/-/core-3.12.1.tgz#a2bdc2d242fa252cbb3d11366154169bdc2cfd41"
+  integrity sha512-dn5uTnsTUjMze26iRhcus8+2auW9+/vOpk6suXg/lhBp+UzOM+EALKE3S5086ANJNgBh1PDHoBX+r1T7wEmheg==
+
 "@tiptap/extension-blockquote@^3.11.0":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-blockquote/-/extension-blockquote-3.11.0.tgz#15adf170582ce3a1b81364d50aa6c5b830201a10"
@@ -679,6 +684,13 @@
 "@tiptap/extension-bubble-menu@^3.11.0":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-bubble-menu/-/extension-bubble-menu-3.11.0.tgz#2ce7820c9aecd0f4ce36c2668353aa8194ea55a5"
+  dependencies:
+    "@floating-ui/dom" "^1.0.0"
+
+"@tiptap/extension-bubble-menu@^3.6.3":
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-bubble-menu/-/extension-bubble-menu-3.12.1.tgz#ebb5c76abb0a2db507667afa208b144745c81105"
+  integrity sha512-RMhZbI+CmcEuGrKgMmHFXyGs/UdAQPBjW8wMEiZIqa2ZxnOwhMd79jRRTzLW7uhArzXMOe6hyytOHuEMvoj+NQ==
   dependencies:
     "@floating-ui/dom" "^1.0.0"
 
@@ -705,6 +717,11 @@
 "@tiptap/extension-floating-menu@^3.11.0":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-floating-menu/-/extension-floating-menu-3.11.0.tgz#521109d9c0d5f6dc5fb6f2fd8181367af8a91be2"
+
+"@tiptap/extension-floating-menu@^3.6.3":
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-floating-menu/-/extension-floating-menu-3.12.1.tgz#ef61b892cbd73f0f7dae4032dedd7b9300c7ccbc"
+  integrity sha512-FY0QmubovOSnH8PhHH0pnmgXUQernfLMeHq2qT1B/itCDOeDULFrBQtZ5KTMAi522czuErW6s0d2EhJQlnazdw==
 
 "@tiptap/extension-gapcursor@^3.11.0":
   version "3.11.0"
@@ -2170,6 +2187,11 @@ react-icons@^5.5.0:
 react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+
+react-is@^19.1.1:
+  version "19.2.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.2.1.tgz#712fa6ee30c8398dc34260017325dad92b9224c5"
+  integrity sha512-L7BnWgRbMwzMAubQcS7sXdPdNLmKlucPlopgAzx7FtYbksWZgEWiuYM5x9T6UqS2Ne0rsgQTq5kY2SGqpzUkYA==
 
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
